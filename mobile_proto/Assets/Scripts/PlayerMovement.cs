@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //BLIPPY
+        //BLIPPYDOTTV
     }
 
     // Update is called once per frame
