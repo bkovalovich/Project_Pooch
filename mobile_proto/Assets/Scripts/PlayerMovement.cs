@@ -16,11 +16,7 @@ public class PlayerMovement : MonoBehaviour
         //BLIPPYDOTTV
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log(Input.touchCount);
-
+    void touchTests() {
         if (Input.touchCount > 0) {
             firstTouch = Input.GetTouch(0);
             switch (firstTouch.phase) {
@@ -45,5 +41,20 @@ public class PlayerMovement : MonoBehaviour
         } else {
             Debug.Log("Not touching the screen");//YUP
         }
+    }
+    void keyboardMovement() {
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        Vector3 tempVect = new Vector3(h, v, 0);
+        tempVect = tempVect.normalized * speed/* * Time.deltaTime*/;
+        rb.MovePosition(transform.position + tempVect);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //touchTests();
+        keyboardMovement();
+
     }
 }
