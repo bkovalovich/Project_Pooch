@@ -42,6 +42,14 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Not touching the screen");//YUP
         }
     }
+
+    void mouseMovement() {
+
+    }
+
+    void touchScreenMovement() {
+
+    }
     void keyboardMovement() {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
@@ -53,9 +61,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //touchTests();
-        keyboardMovement();
-        
 
+        keyboardMovement();
+        touchScreenMovement();
     }
 }
