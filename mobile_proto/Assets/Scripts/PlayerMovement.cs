@@ -7,13 +7,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     public Rigidbody2D rb;
     public Touch firstTouch;
+    public GameObject bulletPrefab;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //BLIPPYDOTTV
     }
 
     void touchTests() {
@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //touchTests();
         keyboardMovement();
+        
 
     }
 }
