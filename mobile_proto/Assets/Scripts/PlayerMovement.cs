@@ -8,18 +8,14 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject bulletPrefab;
     public Vector3 fingerPos;
 
-    /*[SerializeField] */public float speed = 5;
-    private Quaternion lookRotation;
-    private Vector3 direction;
-    public float iter = 0;
-    public float rotateSpeed = 0.05f;
+    [SerializeField] public float movementSpeed;
+    [SerializeField] public float rotateSpeed;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
-        //ParentGameObject.transform.GetChild (1).gameObject;
     }
     void touchTests() {
         if (Input.touchCount > 0) {
@@ -56,63 +52,44 @@ public class PlayerMovement : MonoBehaviour {
         return AngleInRad(vec1, vec2) * 180 / Mathf.PI;
     }
 
-    private void PlayerLookAtClick(Vector3 screenTouch) {
-        // calculate displacement vector (relative Position) between player position and touch position
-      //  Camera camera = transform.Find("Main Camera");
-        Vector3 displacementVector = screenTouch - Camera.main.WorldToScreenPoint(transform.position);
-
-
-        // Since the player should not be upside down, you have to check whether you tap on the left or right side of the player and then rotate the player accordingly around its own axis
-
-        // The calculated look direction in euler angles
-        Vector3 preLookRotation = Quaternion.LookRotation(displacementVector).eulerAngles;
-
-        // if tap right
-        if (displacementVector.x > 0)
-            transform.rotation = Quaternion.Euler(preLookRotation.x, 90, 0);
-        // if tap left
-        else
-            transform.rotation = Quaternion.Euler(preLookRotation.x, -90, 0);
-    }
-
     void touchScreenMovement() {
         if (Input.touchCount > 0) {
-            //    touch = Input.GetTouch(0);
-            PlayerLookAtClick(Input.mousePosition);
+               touch = Input.GetTouch(0);
         }
     }
-
-        
-       
-        //rb.rotation = iter;
-        //iter++;
-
-        //float rotation;
-        //if (transform.eulerAngles.x <= 180f) {
-        //    rotation = transform.eulerAngles.x;
-        //} else {
-        //    rotation = transform.eulerAngles.x - 360f;
-        //}
-
-        //Debug.Log(rotation);
-        //if(iter <= 30) {
-        //    transform.Rotate(Vector3.back * rotateSpeed);
-        //    iter = iter + rotateSpeed;
-        //}
 
     void keyboardMovement() {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 tempVect = new Vector3(h, v, 0);
-        tempVect = tempVect.normalized * speed/* * Time.deltaTime*/;
+        tempVect = tempVect.normalized * movementSpeed/* * Time.deltaTime*/;
         rb.MovePosition(transform.position + tempVect);
     }
+
+    void keyboardTurning() {
+        if (Input.GetKey("a")) {
+            transform.Rotate(Vector3.forward * rotateSpeed);
+        }
+        if (Input.GetKey("d")) {
+            transform.Rotate(Vector3.back * rotateSpeed);
+        }
+    }
+
+
+
 
     // Update is called once per frame
     void Update()
     {
-       // touchTests();
-       // keyboardMovement();
-        touchScreenMovement();
+        //Vector3 tempVect = new Vector3(0, 0.05f, 0);
+        //transform.position += transform.forward * speed* Time.deltaTime;
+        //rb.MovePosition(transform.position + tempVect);
+        //    transform.Translate(transform.forward * speed);
+        // touchTests();
+        // keyboardMovement();
+        // touchScreenMovement();
+        keyboardTurning();
+        transform.position += transform.forward * movementSpeed;
+
     }
 }
