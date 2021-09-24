@@ -6,8 +6,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     public Rigidbody2D rb;
-    public Touch firstTouch;
+    public Touch touch;
     public GameObject bulletPrefab;
+    public Vector3 fingerPos;
+
+    public float RotationSpeed = 5;
+    private Quaternion lookRotation;
+    private Vector3 direction;
 
 
     // Start is called before the first frame update
@@ -15,11 +20,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
     void touchTests() {
         if (Input.touchCount > 0) {
-            firstTouch = Input.GetTouch(0);
-            switch (firstTouch.phase) {
+            touch = Input.GetTouch(0);
+            switch (touch.phase) {
                 case TouchPhase.Began:
                     Debug.Log("finger was just put down");//YUP
                     break;
@@ -43,11 +47,33 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void mouseMovement() {
-
-    }
-
     void touchScreenMovement() {
+        if (Input.touchCount > 0) {
+            touch = Input.GetTouch(0);
+
+            Vector3 touchPos = new Vector3(touch.position.x, touch.position.y, 0);
+            Vector3 direction = touchPos - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            rb.rotation = angle;
+
+            //Vector3 lookPos = touchPos3 - transform.position;
+            //lookPos.y = 0;
+            //var rotation = Quaternion.LookRotation(lookPos);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, RotationSpeed);
+            // Debug.Log("Touching the screen");
+
+            //direction = (touchPos3 - transform.position).normalized;
+
+            //lookRotation = Quaternion.LookRotation(direction);
+            //   transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, /*Time.deltaTime **/ RotationSpeed);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, step);
+
+
+        }// else {
+         //        Debug.Log("Not touching the screen");
+         //    }
+         //Debug.Log($"X: {touch.position.x}");
+         //Debug.Log($"Y: {touch.position.y}");
 
     }
     void keyboardMovement() {
@@ -61,8 +87,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        keyboardMovement();
+        //transform.Rotate(Vector3.forward);
+       // touchTests();
+       // keyboardMovement();
         touchScreenMovement();
     }
 }

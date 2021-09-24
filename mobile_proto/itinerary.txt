@@ -1,7 +1,8 @@
-- create large arena ☑
-- zoom out so the whole arena is visible☑
-- camera should follow keyboard controlled player☑
-- circle bullets that move until they hit the end of the screen☑
+- create large arena ✓
+- zoom out so the whole arena is visible ✓
+- Get correct 
+- camera should follow keyboard controlled player
+- circle bullets that move until they hit the end of the screen
 - Get position of finger tap
 - teleport player to tap
 - full movement
