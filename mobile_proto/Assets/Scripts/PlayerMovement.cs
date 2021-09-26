@@ -86,10 +86,10 @@ public class PlayerMovement : MonoBehaviour {
         //rb.MovePosition(transform.position + tempVect);
         //    transform.Translate(transform.forward * speed);
         // touchTests();
-        // keyboardMovement();
+         keyboardMovement();
         // touchScreenMovement();
-        keyboardTurning();
-        transform.position += transform.forward * movementSpeed;
+        //keyboardTurning();
+        //transform.position += transform.forward * movementSpeed;
 
     }
 }
