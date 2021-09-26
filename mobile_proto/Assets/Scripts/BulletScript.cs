@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     [SerializeField] public float speed;
-    [SerializeField] public float lifetime;
+    public float lifetime = 0.1f;
     public Rigidbody2D rigid;
 
     // Start is called before the first frame update
@@ -15,7 +15,7 @@ public class BulletScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
         lifetime -= Time.deltaTime;
         if (lifetime <= 0f) {
             Destroy(gameObject);    

@@ -11,11 +11,9 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] public float movementSpeed;
     [SerializeField] public float rotateSpeed;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+       rb = GetComponent<Rigidbody2D>();
     }
     void touchTests() {
         if (Input.touchCount > 0) {
@@ -44,28 +42,27 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public static float AngleInRad(Vector3 vec1, Vector3 vec2) {
-        return Mathf.Atan2(vec2.y - vec1.y, vec2.x - vec1.x);
-    }
-
-    public float AngleInDeg(Vector3 vec1, Vector3 vec2) {
-        return AngleInRad(vec1, vec2) * 180 / Mathf.PI;
-    }
-
     void touchScreenMovement() {
         if (Input.touchCount > 0) {
                touch = Input.GetTouch(0);
         }
     }
-
     void keyboardMovement() {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 tempVect = new Vector3(h, v, 0);
         tempVect = tempVect.normalized * movementSpeed/* * Time.deltaTime*/;
         rb.MovePosition(transform.position + tempVect);
+        if (Input.GetKey("q")) {
+            transform.Rotate(Vector3.forward * rotateSpeed);
+        }
+        if (Input.GetKey("e")) {
+            transform.Rotate(Vector3.back * rotateSpeed);
+        }
     }
-
+    Vector3 getPos() {
+        return transform.position;
+    }
     void keyboardTurning() {
         if (Input.GetKey("a")) {
             transform.Rotate(Vector3.forward * rotateSpeed);
@@ -73,23 +70,11 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKey("d")) {
             transform.Rotate(Vector3.back * rotateSpeed);
         }
+        transform.position += transform.up * Time.deltaTime * movementSpeed;
     }
 
-
-
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        //Vector3 tempVect = new Vector3(0, 0.05f, 0);
-        //transform.position += transform.forward * speed* Time.deltaTime;
-        //rb.MovePosition(transform.position + tempVect);
-        //    transform.Translate(transform.forward * speed);
-        // touchTests();
-         keyboardMovement();
-        // touchScreenMovement();
-        //keyboardTurning();
-        //transform.position += transform.forward * movementSpeed;
-
+         keyboardTurning();
     }
 }
