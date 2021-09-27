@@ -1,0 +1,6 @@
+- Enemies that do nothing
+- Player health that depletes when hitting an enemy
+- Framework for randomly generated/randomized levels
+- Enemies that randomly move around
+- Enemies that also shoot randomly and damage the player
+- Sound effects for shooting
