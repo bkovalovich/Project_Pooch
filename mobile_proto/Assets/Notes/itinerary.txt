@@ -4,3 +4,6 @@
 - Enemies that randomly move around
 - Enemies that also shoot randomly and damage the player
 - Sound effects for shooting
+
+RANDOM
+- having a training mode with the beta enemy behavior, for testing new builds and such

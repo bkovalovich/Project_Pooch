@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour {
     public Touch touch;
     public GameObject bulletPrefab;
     public Vector3 fingerPos;
+    public bool isLeftPressed;
+    public bool isRightPressed;
 
     [SerializeField] public float movementSpeed;
     [SerializeField] public float rotateSpeed;
@@ -47,6 +49,9 @@ public class PlayerMovement : MonoBehaviour {
                touch = Input.GetTouch(0);
         }
     }
+
+
+
     void keyboardMovement() {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
@@ -73,8 +78,42 @@ public class PlayerMovement : MonoBehaviour {
         transform.position += transform.up * Time.deltaTime * movementSpeed;
     }
 
+    public void test() {
+        Debug.Log("test");
+    }
+
+    public void leftPressed() {
+        isLeftPressed = true;
+    }
+
+    public void leftNotPressed() {
+        isLeftPressed = false;
+    } 
+
+    public void rightPressed() {
+        isRightPressed = true;
+    }
+
+    public void rightNotPressed() {
+        isRightPressed = false;
+    }
+
+   public void turnLeft() {
+        transform.Rotate(Vector3.forward * rotateSpeed);
+    }
+   public void turnRight() {
+        transform.Rotate(Vector3.back * rotateSpeed);
+    }
+
     void FixedUpdate()
     {
-         keyboardTurning();
+        transform.position += transform.up * Time.deltaTime * movementSpeed;
+        if (isLeftPressed) {
+            turnLeft();
+        }
+        if (isRightPressed) {
+            turnRight();
+        }
+
     }
 }
