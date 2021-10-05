@@ -8,7 +8,12 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletprefab;
     private float elapsed = 0f;
+    public AudioSource source;
     [SerializeField] float rateOfFire;
+
+    void Start() {
+        source = GetComponent<AudioSource>();
+    }
 
     void Shoot(Vector3 offset) {
          // Vector3 firingPointOffset = new Vector3(-4, -4, 0); //whatever you want the offset to be.
@@ -20,7 +25,7 @@ public class Weapon : MonoBehaviour
         if (elapsed >= rateOfFire) {
             elapsed = elapsed % rateOfFire;
             Shoot(new Vector3(0, 0, 0));
-            //Shoot(new Vector3(0,.2f,0));
+            source.Play();
         }
     }
 
