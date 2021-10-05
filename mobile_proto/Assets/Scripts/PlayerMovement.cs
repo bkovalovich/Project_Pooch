@@ -5,11 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
     public Rigidbody2D rb;
     public Touch touch;
-    public GameObject bulletPrefab;
-    public Vector3 fingerPos;
     public bool isLeftPressed;
     public bool isRightPressed;
-
+    [SerializeField] public int health;
     [SerializeField] public float movementSpeed;
     [SerializeField] public float rotateSpeed;
 
@@ -17,6 +15,8 @@ public class PlayerMovement : MonoBehaviour {
     {
        rb = GetComponent<Rigidbody2D>();
     }
+
+    //DEBUG MOVEMENT
     void touchTests() {
         if (Input.touchCount > 0) {
             touch = Input.GetTouch(0);
@@ -43,15 +43,6 @@ public class PlayerMovement : MonoBehaviour {
             Debug.Log("Not touching the screen");//YUP
         }
     }
-
-    void touchScreenMovement() {
-        if (Input.touchCount > 0) {
-               touch = Input.GetTouch(0);
-        }
-    }
-
-
-
     void keyboardMovement() {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
@@ -65,9 +56,6 @@ public class PlayerMovement : MonoBehaviour {
             transform.Rotate(Vector3.back * rotateSpeed);
         }
     }
-    Vector3 getPos() {
-        return transform.position;
-    }
     void keyboardTurning() {
         if (Input.GetKey("a")) {
             transform.Rotate(Vector3.forward * rotateSpeed);
@@ -78,42 +66,53 @@ public class PlayerMovement : MonoBehaviour {
         transform.position += transform.up * Time.deltaTime * movementSpeed;
     }
 
-    public void test() {
-        Debug.Log("test");
-    }
-
+    //INTERFACE WITH TOUCHSCREEN BUTTONS
     public void leftPressed() {
         isLeftPressed = true;
     }
-
     public void leftNotPressed() {
         isLeftPressed = false;
     } 
-
     public void rightPressed() {
         isRightPressed = true;
     }
-
     public void rightNotPressed() {
         isRightPressed = false;
     }
 
-   public void turnLeft() {
+    //VERTICAL MOVEMENT
+    public void turnLeft() {
         transform.Rotate(Vector3.forward * rotateSpeed);
     }
-   public void turnRight() {
+    public void turnRight() {
         transform.Rotate(Vector3.back * rotateSpeed);
     }
 
-    void FixedUpdate()
-    {
-        transform.position += transform.up * Time.deltaTime * movementSpeed;
+    //FINAL MOVEMENT
+    public void touchscreenMovement() {
+        if (health > 0) {
+            transform.position += transform.up * Time.deltaTime * movementSpeed;
+        }
         if (isLeftPressed) {
             turnLeft();
         }
         if (isRightPressed) {
             turnRight();
         }
+    }
 
+    //HEALTH MODIFIERS
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.tag == "theobjectToIgnore") {
+            loseHealth();
+        }
+    }
+    public void loseHealth() {
+        health--;
+    }
+
+    void FixedUpdate()
+    {
+        touchscreenMovement();
     }
 }

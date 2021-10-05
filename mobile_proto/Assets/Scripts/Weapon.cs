@@ -15,7 +15,6 @@ public class Weapon : MonoBehaviour
          Instantiate(bulletprefab, firePoint.position + offset, firePoint.rotation);
     }
 
-    // Update is called once per frame
     void FixedUpdate() {
         elapsed += Time.deltaTime;
         if (elapsed >= rateOfFire) {
