@@ -1,5 +1,5 @@
-- Portals
 - Looping stages
+- Portals
 - game over
 - title screen
 - Enemies that randomly move around
@@ -7,3 +7,4 @@
 
 RANDOM
 - having a training mode with the beta enemy behavior, for testing new builds and such
+- setting rate of fire to 0.00007 makes it just barf bullets

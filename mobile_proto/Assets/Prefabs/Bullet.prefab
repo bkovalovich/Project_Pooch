@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  lifetime: 5
+  lifetime: 2
   rigid: {fileID: 1358817304580090104}
 --- !u!70 &4429808550129487211
 CapsuleCollider2D:

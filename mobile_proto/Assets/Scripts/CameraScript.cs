@@ -15,7 +15,10 @@ public class CameraScript : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 playerInfo = player.transform.transform.position;
-        mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.x/* - cameraDistOffset*/);
+        try {
+            Vector3 playerInfo = player.transform.transform.position;
+            mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.x/* - cameraDistOffset*/);
+        } catch (MissingReferenceException) {
+        }
     }
 }

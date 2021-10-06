@@ -670,7 +670,7 @@ MonoBehaviour:
   firePoint: {fileID: 33463839}
   bulletprefab: {fileID: 8378655219875027530, guid: c20093d7c261c5144addaa5e2d3ebb16, type: 3}
   source: {fileID: 0}
-  rateOfFire: 0.09
+  rateOfFire: 0.1
 --- !u!58 &799483591
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -813,9 +813,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4680599191273686946, guid: afdb22ebc45b18f47a8cb3a5830694e7, type: 3}
+  enemies: []
   range: 20
   background: {fileID: 2133780770}
-  amountOfEnemies: 20
+  amountOfEnemies: 3
 --- !u!4 &1015506510
 Transform:
   m_ObjectHideFlags: 0

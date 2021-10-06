@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
     public Rigidbody2D rb;
@@ -103,8 +104,8 @@ public class PlayerMovement : MonoBehaviour {
 
     //HEALTH MODIFIERS
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "theobjectToIgnore") {
-            loseHealth();
+        if (collision.gameObject.tag == "Enemy") {
+            health--;
         }
     }
     public void loseHealth() {
@@ -113,6 +114,11 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
-        touchscreenMovement();
+        if (health <= 0) {
+            //Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        } else {
+            touchscreenMovement();
+        }
     }
 }
