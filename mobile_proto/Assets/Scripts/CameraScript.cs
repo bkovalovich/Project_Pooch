@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Allows the camera to follow the player no matter how it is transformed by getting its position and setting cameras position to it
 public class CameraScript : MonoBehaviour {
     private Camera mainCamera;
     private GameObject player;
-    // Start is called before the first frame update
+
     void Start()
     {
         mainCamera = GetComponent<Camera>();
         player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         try {

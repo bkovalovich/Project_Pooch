@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour {
         transform.position += transform.up * Time.deltaTime * movementSpeed;
     }
 
-    //INTERFACE WITH TOUCHSCREEN BUTTONS
+    //INTERFACES WITH TOUCHSCREEN BUTTONS
     public void leftPressed() {
         isLeftPressed = true;
     }
@@ -116,7 +116,6 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (health <= 0) {
             //Destroy(gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         } else {
             touchscreenMovement();
         }

@@ -386,7 +386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -450, y: -270}
+  m_AnchoredPosition: {x: -781, y: -416}
   m_SizeDelta: {x: 227.4574, y: 232.7664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &227853621
@@ -813,10 +813,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4680599191273686946, guid: afdb22ebc45b18f47a8cb3a5830694e7, type: 3}
-  enemies: []
+  destroyedEnemies: 0
   range: 20
   background: {fileID: 2133780770}
-  amountOfEnemies: 3
+  amountOfEnemies: 2
 --- !u!4 &1015506510
 Transform:
   m_ObjectHideFlags: 0
