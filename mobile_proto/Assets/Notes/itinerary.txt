@@ -1,7 +1,4 @@
-- Looping stages
 - Portals
-- game over
-- title screen
 - Enemies that randomly move around
 - Enemies that also shoot randomly and damage the player
 

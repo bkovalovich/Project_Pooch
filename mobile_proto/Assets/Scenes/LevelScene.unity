@@ -813,7 +813,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4680599191273686946, guid: afdb22ebc45b18f47a8cb3a5830694e7, type: 3}
-  destroyedEnemies: 0
   range: 20
   background: {fileID: 2133780770}
   amountOfEnemies: 2

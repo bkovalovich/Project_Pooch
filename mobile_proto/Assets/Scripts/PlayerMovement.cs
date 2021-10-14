@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour {
     void FixedUpdate()
     {
         if (health <= 0) {
-            //Destroy(gameObject);
+            SceneManager.LoadScene("GameOver");
         } else {
             touchscreenMovement();
         }
