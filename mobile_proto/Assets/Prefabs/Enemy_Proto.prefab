@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4680599191273686949}
   - component: {fileID: 4680599191273686950}
   - component: {fileID: 8634227651282099130}
-  - component: {fileID: 8066262465633382362}
   m_Layer: 0
   m_Name: Enemy_Proto
   m_TagString: Enemy
@@ -74,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2e7fc02825959614c9be8a2fb42cada0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -136,14 +135,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
---- !u!210 &8066262465633382362
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4680599191273686946}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
+  gameManager: {fileID: 0}
+  gmScript: {fileID: 0}

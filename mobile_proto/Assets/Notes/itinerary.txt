@@ -1,7 +1,3 @@
-- Portals
-- Enemies that randomly move around
-- Enemies that also shoot randomly and damage the player
+Misc
 
-RANDOM
-- having a training mode with the beta enemy behavior, for testing new builds and such
-- setting rate of fire to 0.00007 makes it just barf bullets
+- placeholder music for every menu
