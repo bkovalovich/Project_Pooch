@@ -50,13 +50,8 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 tempVect = new Vector3(h, v, 0);
         tempVect = tempVect.normalized * movementSpeed/* * Time.deltaTime*/;
         rb.MovePosition(transform.position + tempVect);
-        if (Input.GetKey("q")) {
-            transform.Rotate(Vector3.forward * rotateSpeed);
-        }
-        if (Input.GetKey("e")) {
-            transform.Rotate(Vector3.back * rotateSpeed);
-        }
     }
+
     void keyboardTurning() {
         if (Input.GetKey("a")) {
             transform.Rotate(Vector3.forward * rotateSpeed);
@@ -118,6 +113,7 @@ public class PlayerMovement : MonoBehaviour {
             SceneManager.LoadScene("GameOver");
         } else {
             touchscreenMovement();
+           // keyboardMovement();
         }
     }
 }

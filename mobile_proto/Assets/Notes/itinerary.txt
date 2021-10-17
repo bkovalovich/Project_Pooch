@@ -1,3 +1,5 @@
-Misc
+CATS	
+- talk with ethan and hash out bsaic enemy actions
 
-- placeholder music for every menu
+Edit brig background with grid, then replace temp
+WALLS

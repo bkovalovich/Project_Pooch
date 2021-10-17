@@ -9,7 +9,6 @@ public class GameManagerScript : MonoBehaviour
 {
     public GameObject enemyPrefab; //Basic enemy prefab
     public GameObject portalPrefab;
-    private int destroyedEnemies = 0; //Number of destoryed enemies
 
     public static int level = 1;//Current Level
 
@@ -34,20 +33,15 @@ public class GameManagerScript : MonoBehaviour
         return new Vector3(Random.Range(background.transform.position.x - range, background.transform.position.x + range), Random.Range(background.transform.position.y - range, background.transform.position.y + range), 0f);
     }
 
-    //EnemyDestroyed()
-    //Called by all enemy prefabs, communicates that it was destroyed
-    public void EnemyDestroyed() {
-        destroyedEnemies++;
-    }
 
     //FixedUpdate()
     //Starts next round if all enemies were destroyed
     public void FixedUpdate() {
         //Debug.Log(level);
-        if (destroyedEnemies == amountOfEnemies) {
+        if (EnemyScript.destroyedEnemies == amountOfEnemies) {
+            EnemyScript.destroyedEnemies = 0;
             Instantiate(portalPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
             level++;
-            destroyedEnemies++;
         }
     }
 }

@@ -6,14 +6,15 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] public int health;//Number of hits needed to destroy enemy
-    public GameObject gameManager;//Both invoked in order to communicate when object is destroyed
-    public GameManagerScript gmScript;
+    [SerializeField] public float rotateSpeed;
+    [SerializeField] public float movementSpeed;
 
-    //Start()
-    //Initializes gameManager reference
+
+    public static int destroyedEnemies = 0;
+    public static GameObject player;
+
     void Start() {
-        gameManager = GameObject.Find("GameManager");
-        gmScript = gameManager.GetComponent<GameManagerScript>();
+        player = GameObject.Find("Player");
     }
 
     //OnTriggerEnter2D()
@@ -24,13 +25,38 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    void facePlayer() {
+        try {
+            Vector3 targ = player.transform.position;
+            targ.z = 0f;
+            Vector3 objectPos = transform.position;
+
+            targ.x = targ.x - objectPos.x;
+            targ.y = targ.y - objectPos.y;
+
+            float playerAngle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
+            if (playerAngle < 0) {
+                playerAngle = 360 + playerAngle;
+            }
+            if (playerAngle > transform.rotation.eulerAngles.z) {
+                transform.Rotate(Vector3.forward * rotateSpeed);
+            } else if (playerAngle < transform.rotation.eulerAngles.z) {
+                transform.Rotate(Vector3.back * rotateSpeed);
+            }
+        } catch (MissingReferenceException) { }
+    }
+
     //FixedUpdate()
     //Destroys enemy if health is equal/below zero
     public void FixedUpdate()
     {
         if(health <= 0) {
-            gmScript.EnemyDestroyed();
+            destroyedEnemies++;
             Destroy(gameObject);
+        } else {
+            facePlayer();
+            transform.position += transform.right * Time.deltaTime * movementSpeed;
         }
     }
+
 }
