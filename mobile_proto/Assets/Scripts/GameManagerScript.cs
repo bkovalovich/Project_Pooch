@@ -22,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
     public void Start()
     {
         levelText.text = levelText.text + level;
+        amountOfEnemies = (amountOfEnemies * level)/2;
         for(int i = 0; i < amountOfEnemies; i++) {
             Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
         }
@@ -37,7 +38,6 @@ public class GameManagerScript : MonoBehaviour
     //FixedUpdate()
     //Starts next round if all enemies were destroyed
     public void FixedUpdate() {
-        //Debug.Log(level);
         if (EnemyScript.destroyedEnemies == amountOfEnemies) {
             EnemyScript.destroyedEnemies = 0;
             Instantiate(portalPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));

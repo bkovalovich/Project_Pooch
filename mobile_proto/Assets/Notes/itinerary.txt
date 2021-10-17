@@ -1,5 +1,2 @@
-CATS	
-- talk with ethan and hash out bsaic enemy actions
-
 Edit brig background with grid, then replace temp
 WALLS

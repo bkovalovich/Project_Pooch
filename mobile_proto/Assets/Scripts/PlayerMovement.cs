@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] public int health;
     [SerializeField] public float movementSpeed;
     [SerializeField] public float rotateSpeed;
+    [SerializeField] public bool debugMode;
 
     void Start()
     {
@@ -48,7 +49,7 @@ public class PlayerMovement : MonoBehaviour {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 tempVect = new Vector3(h, v, 0);
-        tempVect = tempVect.normalized * movementSpeed/* * Time.deltaTime*/;
+        tempVect = tempVect.normalized * 0.1f;
         rb.MovePosition(transform.position + tempVect);
     }
 
