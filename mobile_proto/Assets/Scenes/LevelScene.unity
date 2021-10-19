@@ -386,7 +386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -781, y: -416}
+  m_AnchoredPosition: {x: 1051, y: -416}
   m_SizeDelta: {x: 227.4574, y: 232.7664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &227853621
@@ -655,8 +655,9 @@ MonoBehaviour:
   isLeftPressed: 0
   isRightPressed: 0
   health: 1
-  movementSpeed: 7
-  rotateSpeed: 4.5
+  movementSpeed: 6
+  rotateSpeed: 5
+  debugMode: 0
 --- !u!212 &799483586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -914,7 +915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4680599191273686946, guid: afdb22ebc45b18f47a8cb3a5830694e7, type: 3}
   portalPrefab: {fileID: 2711387511938367422, guid: cd223fac273e1c94191f0ae6048afbe0, type: 3}
-  range: 30
+  range: 25
   background: {fileID: 2133780770}
   levelText: {fileID: 1130482313}
   amountOfEnemies: 5
