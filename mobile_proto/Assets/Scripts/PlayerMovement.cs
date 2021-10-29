@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] public int health;
     [SerializeField] public float movementSpeed;
     [SerializeField] public float rotateSpeed;
-    [SerializeField] public bool debugMode;
 
     void Start()
     {
@@ -114,7 +113,7 @@ public class PlayerMovement : MonoBehaviour {
             SceneManager.LoadScene("GameOver");
         } else {
             touchscreenMovement();
-           // keyboardMovement();
+            //keyboardMovement();
         }
     }
 }

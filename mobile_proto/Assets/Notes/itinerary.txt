@@ -1,2 +1,6 @@
 Edit brig background with grid, then replace temp
 WALLS
+
+Helpful Bugs
+- if you set rate of fire to a tiny number you just barf bullets
+- trig 0 glitch
