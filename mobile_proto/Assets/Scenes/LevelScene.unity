@@ -243,7 +243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33463838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 12.6, z: 0}
+  m_LocalPosition: {x: 0, y: 11.7, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 799483587}
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9d5344743d1b53243b16a9e2e145a8b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d463f874dc6bd3d44bdf7aba526e1453, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -655,8 +655,8 @@ MonoBehaviour:
   isLeftPressed: 0
   isRightPressed: 0
   health: 1
-  movementSpeed: 6
-  rotateSpeed: 5
+  movementSpeed: 7
+  rotateSpeed: 4
 --- !u!212 &799483586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -697,7 +697,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a4cd18137a5d6b342a5ea6f7790f55a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bb6d834ef5c3db43bbf578716f2cd14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -754,7 +754,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 10
 --- !u!114 &799483590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,7 +917,7 @@ MonoBehaviour:
   range: 25
   background: {fileID: 2133780770}
   levelText: {fileID: 1130482313}
-  amountOfEnemies: 2
+  amountOfEnemies: 5
 --- !u!4 &1015506510
 Transform:
   m_ObjectHideFlags: 0
@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b02db4e59432d64ab9b688ae4633fc1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a476be528c40ab4aa61c6866664ec05, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1313,7 +1313,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8ddedf0fad2b2e743b9f5ad045dfe00e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 25cfa82b679512f4689486bc300f959e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
