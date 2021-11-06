@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour {
 
     //HEALTH MODIFIERS
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Enemy") {
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Wall") {
             health--;
         }
     }
@@ -112,8 +112,9 @@ public class PlayerMovement : MonoBehaviour {
         if (health <= 0) {
             SceneManager.LoadScene("GameOver");
         } else {
-            touchscreenMovement();
+            //touchscreenMovement();
             //keyboardMovement();
+            keyboardTurning();
         }
     }
 }
