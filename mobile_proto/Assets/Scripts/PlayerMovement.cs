@@ -3,18 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+enum PlayerState {
+    Hittable, 
+    Invincible
+}
 public class PlayerMovement : MonoBehaviour {
     public Rigidbody2D rb;
     public Touch touch;
     public bool isLeftPressed;
     public bool isRightPressed;
-    [SerializeField] public int health;
+    private float currentInvincibilityTime = 0;
+    public SpriteRenderer spriteRenderer;
+    public Color defaultColor;
+
+    public static float health = 5;
+
+    [SerializeField] public float amountOfInvincibleTimeOnHit;
     [SerializeField] public float movementSpeed;
     [SerializeField] public float rotateSpeed;
 
     void Start()
     {
        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        //Color newColor = new Vector4(0.3f, 0.4f, 0.6f);
+         defaultColor = spriteRenderer.color;
     }
 
     //DEBUG MOVEMENT
@@ -99,21 +112,32 @@ public class PlayerMovement : MonoBehaviour {
 
     //HEALTH MODIFIERS
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Wall") {
-            health--;
+        if(collision.gameObject.tag == "Wall") {
+            health = 0;
+        }
+        if (currentInvincibilityTime <= 0 && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")) {
+            loseHealth(1f);
+            currentInvincibilityTime = amountOfInvincibleTimeOnHit;
         }
     }
-    public void loseHealth() {
-        health--;
+
+    public void loseHealth(float damage) {
+        health = health - damage;
     }
 
     void FixedUpdate()
-    {
+    {  
         if (health <= 0) {
             SceneManager.LoadScene("GameOver");
         } else {
-            //touchscreenMovement();
-            //keyboardMovement();
+            if(currentInvincibilityTime >= 0f) {
+                currentInvincibilityTime -= Time.deltaTime;
+                spriteRenderer.color = Color.red;
+            } else {
+                spriteRenderer.color = defaultColor;
+        }
+        //touchscreenMovement();
+       // keyboardMovement();
             keyboardTurning();
         }
     }

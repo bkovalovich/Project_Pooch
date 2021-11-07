@@ -10,10 +10,4 @@ public class GameOverScreenScript : MonoBehaviour
         GameManagerScript.level = 1;
         EnemyScript.destroyedEnemies = 0;
     }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        
-    }
 }
