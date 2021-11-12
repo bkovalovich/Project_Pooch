@@ -38,6 +38,9 @@ public class GameManagerScript : MonoBehaviour
         return new Vector3(Random.Range(background.transform.position.x - range, background.transform.position.x + range), Random.Range(background.transform.position.y - range, background.transform.position.y + range), 0f);
     }
 
+    public void createLevelsEnemies() {
+
+    }
 
     //FixedUpdate()
     //Starts next round if all enemies were destroyed
