@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Handles behavior for basic enemies
 public class EnemyScript : MonoBehaviour {
-    [SerializeField] public int health;//Number of hits needed to destroy enemy
+    private int currentHealth;
+    [SerializeField] public int startingHealth;
     [SerializeField] public float movementSpeed;
     [SerializeField] public float maxRotateSpeed;
     private float prevPlayerAngle;
     private bool isRotatingRight;
 
-    public float currentRotateSpeed;
+    private float currentRotateSpeed;
     public static int destroyedEnemies = 0;
     public static GameObject player;
 
+  //  public Image healthBarImage;
+
     void Start() {
+        currentHealth = startingHealth;
         player = GameObject.Find("Player");
         currentRotateSpeed = maxRotateSpeed;
     }
@@ -23,7 +28,12 @@ public class EnemyScript : MonoBehaviour {
     //Removes health if hit with a bullet
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Bullet") {
-            health--;
+            currentHealth--;
+            Destroy(collision.gameObject);
+
+            float healthBarValue = currentHealth / startingHealth;
+            //healthBarImage.transform.position = transform.position;
+            //healthBarImage.fillAmount = healthBarValue;
         }
     }
     //getGameObjectAngle()
@@ -91,10 +101,11 @@ public class EnemyScript : MonoBehaviour {
     //FixedUpdate()
     //Destroys enemy if health is equal/below zero
     public void FixedUpdate() {
-        if (health <= 0) {
+        if (currentHealth <= 0) {
             destroyedEnemies++;
             Destroy(gameObject);
         } else {
+            //healthBarImage.transform.position = transform.position;
             FaceOtherObject(GetGameObjectAngle(player));
             transform.position += transform.right * Time.deltaTime * movementSpeed;
         }

@@ -9,25 +9,26 @@ public class GameManagerScript : MonoBehaviour
 {
     public GameObject enemyPrefab; //Basic enemy prefab
     public GameObject enemy2Prefab; //Basic enemy2 prefab
+    public GameObject enemy3Prefab; //Basic enemy2 prefab
     public GameObject portalPrefab;
 
     public static int level = 1;//Current Level
+    private int amountOfEnemies; //Number of enemies per round
 
     [SerializeField] public int range; //Size of possible spawns 
     [SerializeField] public GameObject background; //In order to maintain spawn on the map
     [SerializeField] public Text levelText;
     [SerializeField] public Text playerHealthText;
-    [SerializeField] public  int amountOfEnemies; //Number of enemies per round
 
     //Start()
     //Creates enemies at random positions
     public void Start()
     {
         levelText.text = levelText.text + level;
-        amountOfEnemies = (amountOfEnemies * level)/2;
-        for(int i = 0; i < amountOfEnemies; i = i+2) {
+        for(amountOfEnemies = 0; amountOfEnemies < level; amountOfEnemies = amountOfEnemies + 3) {//= amountOfEnemies + 2
             Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
            Instantiate(enemy2Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+           Instantiate(enemy3Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
         }
     }
 
@@ -41,6 +42,7 @@ public class GameManagerScript : MonoBehaviour
     //FixedUpdate()
     //Starts next round if all enemies were destroyed
     public void FixedUpdate() {
+        //Debug.Log()
         playerHealthText.text = "Health: " + PlayerMovement.health.ToString();
         if (EnemyScript.destroyedEnemies == amountOfEnemies) {
             EnemyScript.destroyedEnemies = 0;
