@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 //Handles behavior for basic enemies
 public class EnemyScript : MonoBehaviour {
-    private int currentHealth;
-    [SerializeField] public int startingHealth;
+    private float currentHealth;
+    [SerializeField] public float startingHealth;
     [SerializeField] public float movementSpeed;
     [SerializeField] public float maxRotateSpeed;
     private float prevPlayerAngle;
@@ -16,7 +16,14 @@ public class EnemyScript : MonoBehaviour {
     public static int destroyedEnemies = 0;
     public static GameObject player;
 
-  //  public Image healthBarImage;
+
+    public float HealthRatio {
+        get { return currentHealth / startingHealth; }
+    }
+
+    public Vector3 EnemyPosition {
+        get { return transform.position; }
+    }
 
     void Start() {
         currentHealth = startingHealth;
@@ -27,13 +34,11 @@ public class EnemyScript : MonoBehaviour {
     //OnTriggerEnter2D()
     //Removes health if hit with a bullet
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Bullet") {
+        if (collision.gameObject.tag == "ChargeBullet" || collision.gameObject.tag == "Shield") {
+            currentHealth--;
+        }else if (collision.gameObject.tag == "Bullet") {
             currentHealth--;
             Destroy(collision.gameObject);
-
-            float healthBarValue = currentHealth / startingHealth;
-            //healthBarImage.transform.position = transform.position;
-            //healthBarImage.fillAmount = healthBarValue;
         }
     }
     //getGameObjectAngle()

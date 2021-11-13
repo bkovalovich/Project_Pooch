@@ -1,8 +1,21 @@
-Edit brig background with grid, then replace temp
-WALLS
-
 Helpful Bugs
 - if you set rate of fire to a tiny number you just barf bullets
 - trig 0 glitch
 
 - banana peel (ollie)
+- no walls mode (will)
+
+Other:
+- starting from later levels if you do wells
+
+11/12
+Trig 0 glitch
+Jitter glitch
+Shield Ability
+Fix Sorting Groups
+
+Enemy Health Bars
+Clean up code
+Add different damage amounts to allllll abilities
+Finish Shield
+Fix Spawn Position

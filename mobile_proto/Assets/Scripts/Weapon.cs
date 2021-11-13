@@ -8,8 +8,8 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;//Where the weapon is used
     public GameObject bulletprefab;//The basic bullet that will be continuously used
    // public AudioSource source; //Sound effect for shooting
-    private float elapsed = 0f;//Determines current time between weapon uses
-    [SerializeField] float rateOfFire;//How often the bullet can be fired
+    private float currentRechargeTime = 0f;//Determines current time between weapon uses
+    [SerializeField] public float rateOfFire;//How often the bullet can be fired
 
     //Start()
     //Gets audio source
@@ -19,16 +19,16 @@ public class Weapon : MonoBehaviour
 
     //Shoot()
     //Creates bullet
-    void Shoot(Vector3 offset) {
+    public void Shoot(Vector3 offset) {
          Instantiate(bulletprefab, firePoint.position + offset, firePoint.rotation);
     }
 
     //FixedUpdate()
     //Shoots bullets at a rate determined by float rateOfFire
-    void FixedUpdate() {
-        elapsed += Time.deltaTime;
-        if (elapsed >= rateOfFire) {
-            elapsed = elapsed % rateOfFire;
+     public void FixedUpdate() {
+        currentRechargeTime += Time.deltaTime;
+        if (currentRechargeTime >= rateOfFire) {
+            currentRechargeTime = currentRechargeTime % rateOfFire;
             Shoot(new Vector3(0, 0, 0));
             //source.Play();
         }

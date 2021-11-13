@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SecondaryWeapon : MonoBehaviour {
+
+    public Transform firePoint;//Where the weapon is used
+    public GameObject bulletprefab;//The basic bullet that will be continuously used
+    private bool isCoolingDown = false;//Whether you can shoot at the moment
+    private float currentRechargeTime = 0f;//Determines current time between weapon uses
+    [SerializeField] public float maxRechargeTime;//Amount of time between shots
+
+    //IsCoolingDown
+    //Returns isCoolingDown
+    public bool IsCoolingDown {
+        get { return isCoolingDown; }
+    }
+
+    //RechargeRatio
+    //Returns ratio corresponding to how long recharge will take, used for refill on button
+    public float RechargeRatio {
+        get { return currentRechargeTime / maxRechargeTime; }
+    }
+
+    //Shoot()
+    //Creates bullet
+    public void Shoot(Vector3 offset) {
+        Instantiate(bulletprefab, firePoint.position + offset, firePoint.rotation);
+    }
+
+    //ChargedPressed()
+    //Calls Shoot() and starts the cooldown period so it can't be called for the length of field maxRechargeTime
+    public void ChargedPressed() {
+        if (isCoolingDown == false) {
+            Shoot(new Vector3(0, 0, 0));
+            currentRechargeTime = maxRechargeTime;
+            isCoolingDown = true;
+        }
+    }
+
+    //FixedUpdate()
+    //Counts down the recharge time according to field maxRechargeTime
+    public void FixedUpdate() {
+        isCoolingDown = currentRechargeTime <= 0 ? false : true;
+        currentRechargeTime -= isCoolingDown ? Time.deltaTime : 0;
+    } 
+
+}
