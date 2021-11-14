@@ -3,31 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum PlayerState {
-    Hittable, 
-    Invincible
-}
 public class PlayerMovement : MonoBehaviour {
     public Rigidbody2D rb;
-    public Touch touch;
-    public bool isLeftPressed;
+    public Touch touch;//For debug touch tests
+    public bool isLeftPressed;//Main variables for left and right movement with touchscreen
     public bool isRightPressed;
-    private float currentInvincibilityTime = 0;
-    public SpriteRenderer spriteRenderer;
+    private float currentInvincibilityTime = 0;//How much invincibility you have left
+    public SpriteRenderer spriteRenderer;//For changing texture color
     public Color defaultColor;
+    public ShieldScript shieldScript;
 
-    public static float health = 5;
 
-    [SerializeField] public float amountOfInvincibleTimeOnHit;
-    [SerializeField] public float movementSpeed;
-    [SerializeField] public float rotateSpeed;
+    public static float health = 5;//Main health bar
 
+    [SerializeField] public float amountOfInvincibleTimeOnHit;//How much invinicbility you get on hit
+    [SerializeField] public float movementSpeed;//How fast you move forward
+    [SerializeField] public float rotateSpeed;//How fast you turn
+
+    //PROPERTIES
+    public Vector3 PlayerPosition {
+        get { return transform.position; }
+    }
+
+    //START()
     void Start()
     {
-       rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //Color newColor = new Vector4(0.3f, 0.4f, 0.6f);
-         defaultColor = spriteRenderer.color;
+        defaultColor = spriteRenderer.color;
+        shieldScript = GetComponentInChildren<ShieldScript>();
     }
 
     //DEBUG MOVEMENT
@@ -64,13 +68,17 @@ public class PlayerMovement : MonoBehaviour {
         tempVect = tempVect.normalized * 0.1f;
         rb.MovePosition(transform.position + tempVect);
     }
-
     void keyboardTurning() {
         if (Input.GetKey("a")) {
             transform.Rotate(Vector3.forward * rotateSpeed);
         }
         if (Input.GetKey("d")) {
             transform.Rotate(Vector3.back * rotateSpeed);
+        }
+        if (Input.GetKey("p")) {
+            shieldScript.ShieldPressed();
+        } else {
+            shieldScript.ShieldNotPressed();
         }
         transform.position += transform.up * Time.deltaTime * movementSpeed;
     }
@@ -120,25 +128,27 @@ public class PlayerMovement : MonoBehaviour {
             currentInvincibilityTime = amountOfInvincibleTimeOnHit;
         }
     }
-
     public void loseHealth(float damage) {
         health = health - damage;
+    }
+    public bool isInvincible() {
+        return currentInvincibilityTime >= 0f;
     }
 
     void FixedUpdate()
     {  
         if (health <= 0) {
             SceneManager.LoadScene("GameOver");
-        } else {
-            if(currentInvincibilityTime >= 0f) {
+        }
+            if(isInvincible()) {
                 currentInvincibilityTime -= Time.deltaTime;
                 spriteRenderer.color = Color.red;
             } else {
-                spriteRenderer.color = defaultColor;
+            spriteRenderer.color = defaultColor;
+            
         }
+        keyboardTurning();
         //touchscreenMovement();
-       // keyboardMovement();
-            keyboardTurning();
-        }
+        // keyboardMovement();
     }
 }

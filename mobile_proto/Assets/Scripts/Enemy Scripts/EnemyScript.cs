@@ -5,18 +5,22 @@ using UnityEngine.UI;
 
 //Handles behavior for basic enemies
 public class EnemyScript : MonoBehaviour {
-    private float currentHealth;
-    [SerializeField] public float startingHealth;
-    [SerializeField] public float movementSpeed;
-    [SerializeField] public float maxRotateSpeed;
-    private float prevPlayerAngle;
-    private bool isRotatingRight;
+    protected float currentHealth;
+    protected float currentRotateSpeed;
+    protected float prevPlayerAngle;
+    protected bool isRotatingRight;
 
-    private float currentRotateSpeed;
     public static int destroyedEnemies = 0;
     public static GameObject player;
 
+    private float normalBulletDamage = 1;
+    private float chargeBulletDamage = 10; 
 
+    [SerializeField] public float startingHealth;
+    [SerializeField] public float movementSpeed;
+    [SerializeField] public float maxRotateSpeed;
+
+    //PROPERTIES
     public float HealthRatio {
         get { return currentHealth / startingHealth; }
     }
@@ -34,24 +38,31 @@ public class EnemyScript : MonoBehaviour {
     //OnTriggerEnter2D()
     //Removes health if hit with a bullet
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "ChargeBullet" || collision.gameObject.tag == "Shield") {
-            currentHealth--;
-        }else if (collision.gameObject.tag == "Bullet") {
-            currentHealth--;
-            Destroy(collision.gameObject);
+        switch (collision.gameObject.tag) {
+            case "ChargeBullet":
+                currentHealth = currentHealth - chargeBulletDamage;
+                break;
+            case "Shield":
+                currentHealth = 0;
+                break;
+            case "Bullet":
+                currentHealth = currentHealth - normalBulletDamage;
+                Destroy(collision.gameObject);
+                break;
+            default: break;
         }
     }
+
     //getGameObjectAngle()
     //Gets the angle between current object and parameter object
-    float GetGameObjectAngle(GameObject player) {
-        Vector3 targ = player.transform.position;
-        targ.z = 0f;
-        Vector3 objectPos = transform.position;
+    public float GetGameObjectAngle(GameObject player) {
+        Vector3 playerToEnemyDistance = player.transform.position;
+        playerToEnemyDistance.z = 0f;
 
-        targ.x = targ.x - objectPos.x;
-        targ.y = targ.y - objectPos.y;
+        playerToEnemyDistance.x = playerToEnemyDistance.x - transform.position.x;
+        playerToEnemyDistance.y = playerToEnemyDistance.y - transform.position.y;
 
-        float playerAngle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
+        float playerAngle = Mathf.Atan2(playerToEnemyDistance.y, playerToEnemyDistance.x) * Mathf.Rad2Deg;
 
         if (playerAngle < 0) {
             return 360 + playerAngle;
@@ -59,9 +70,9 @@ public class EnemyScript : MonoBehaviour {
         return playerAngle;
     }
 
-    //CorrectAngle()
+    //CalcRotateSpeed()
     //Return a proper angle that does not cause jittering when turning
-    float CalcRotateSpeed(float playerAngle, float objectAngle, float currentRotateSpeed, float maxRotateSpeed) {
+    public float CalcRotateSpeed(float playerAngle, float objectAngle, float currentRotateSpeed, float maxRotateSpeed) {
         float checkSmallerThanRotate = Mathf.Abs(playerAngle - objectAngle);
         if (checkSmallerThanRotate < currentRotateSpeed) {
             return checkSmallerThanRotate;
@@ -69,7 +80,7 @@ public class EnemyScript : MonoBehaviour {
         return maxRotateSpeed;
     }
 
-    bool ChangedAxes(float playerAngle) {
+    public bool ChangedAxes(float playerAngle) {
         if((prevPlayerAngle <= 10 && prevPlayerAngle >= 0) && (playerAngle <= 360 && playerAngle >= 350) || (prevPlayerAngle <= 360 && prevPlayerAngle >= 350) && (playerAngle <= 10 && playerAngle >= 0)) {
             return true;
         } else {
@@ -77,7 +88,7 @@ public class EnemyScript : MonoBehaviour {
         }
     }
 
-    void DetermineDirection(float playerAngle) { //(playerAngle < 15f && playerAngle > 0f) || (playerAngle < 359.9999f && playerAngle > 340f)
+    public void DetermineDirection(float playerAngle) { //(playerAngle < 15f && playerAngle > 0f) || (playerAngle < 359.9999f && playerAngle > 340f)
         if (ChangedAxes(playerAngle)) {
             isRotatingRight = !isRotatingRight;
         } else
@@ -88,9 +99,9 @@ public class EnemyScript : MonoBehaviour {
         }
     }
 
-    //FacePlayer(){
+    //FaceOtherObject(){
     //Continuously rotate to face another object 
-    void FaceOtherObject(float playerAngle) {
+    public void FaceOtherObject(float playerAngle) {
         try {
             currentRotateSpeed = CalcRotateSpeed(playerAngle, transform.rotation.eulerAngles.z, currentRotateSpeed, maxRotateSpeed);
             DetermineDirection(playerAngle);
@@ -103,16 +114,10 @@ public class EnemyScript : MonoBehaviour {
         prevPlayerAngle = playerAngle;
     }
 
-    //FixedUpdate()
-    //Destroys enemy if health is equal/below zero
-    public void FixedUpdate() {
+    public void DetermineIfDestroyed() {
         if (currentHealth <= 0) {
             destroyedEnemies++;
             Destroy(gameObject);
-        } else {
-            //healthBarImage.transform.position = transform.position;
-            FaceOtherObject(GetGameObjectAngle(player));
-            transform.position += transform.right * Time.deltaTime * movementSpeed;
         }
     }
 

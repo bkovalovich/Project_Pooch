@@ -807,6 +807,7 @@ MonoBehaviour:
   isRightPressed: 0
   spriteRenderer: {fileID: 0}
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  shieldScript: {fileID: 0}
   amountOfInvincibleTimeOnHit: 2
   movementSpeed: 7
   rotateSpeed: 4
@@ -1050,7 +1051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 33463839}
   bulletprefab: {fileID: 7652395650412892264, guid: 4ad9b7c9b7eda7d479f05c2c7ed7cf3a, type: 3}
-  maxRechargeTime: 3
+  maxRechargeTime: 6
 --- !u!1 &1009343108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,7 +1147,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1185,6 +1186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9aff54f3a79af94eb7be45ca30593de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  player: {fileID: 799483584}
 --- !u!1 &1015506508
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,8 +14,8 @@ Jitter glitch
 Shield Ability
 Fix Sorting Groups
 
-Enemy Health Bars
-Clean up code
 Add different damage amounts to allllll abilities
 Finish Shield
 Fix Spawn Position
+
+Music and SFX

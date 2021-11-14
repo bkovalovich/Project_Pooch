@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 1126682637515794376}
   - component: {fileID: 8986572941026706962}
   - component: {fileID: 255728191701967921}
+  - component: {fileID: 3608333411454433256}
   m_Layer: 0
   m_Name: Enemy_Proto
   m_TagString: Enemy
@@ -339,6 +340,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c517c2aeb0aae64796042ee0c6d0868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 3
+  startingHealth: 5
+  movementSpeed: 3
+  maxRotateSpeed: 3
+--- !u!114 &3608333411454433256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072090802444764090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f67fcfb24a2fe48a3b90eac96708e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 5
   movementSpeed: 3
   maxRotateSpeed: 3

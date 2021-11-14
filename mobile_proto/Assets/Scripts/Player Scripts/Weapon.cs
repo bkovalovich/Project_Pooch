@@ -11,6 +11,11 @@ public class Weapon : MonoBehaviour
     private float currentRechargeTime = 0f;//Determines current time between weapon uses
     [SerializeField] public float rateOfFire;//How often the bullet can be fired
 
+    public float RateOfFire {
+        get { return rateOfFire; }
+        set { rateOfFire = value; }
+    }
+
     //Start()
     //Gets audio source
     void Start() {

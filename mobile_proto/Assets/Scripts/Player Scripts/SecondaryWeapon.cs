@@ -38,9 +38,16 @@ public class SecondaryWeapon : MonoBehaviour {
         }
     }
 
+    public void KeyboardShooting() {
+        if (Input.GetKey("o")) {
+            ChargedPressed();
+        }
+    }
+
     //FixedUpdate()
     //Counts down the recharge time according to field maxRechargeTime
     public void FixedUpdate() {
+        KeyboardShooting();
         isCoolingDown = currentRechargeTime <= 0 ? false : true;
         currentRechargeTime -= isCoolingDown ? Time.deltaTime : 0;
     } 
