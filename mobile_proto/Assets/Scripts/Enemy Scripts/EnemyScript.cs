@@ -9,12 +9,20 @@ public class EnemyScript : MonoBehaviour {
     protected float currentRotateSpeed;
     protected float prevPlayerAngle;
     protected bool isRotatingRight;
+    protected float currentPauseTime = 0;
+    protected float amountOfPauseTimeOnHit = 0.06f;
+
+    protected Color defaultColor;
+    protected Color hitColor;
+
+    protected bool touchingWalls;
 
     public static int destroyedEnemies = 0;
     public static GameObject player;
+    public SpriteRenderer spriteRenderer;//For changing texture color
 
     private float normalBulletDamage = 1;
-    private float chargeBulletDamage = 10; 
+    private float chargeBulletDamage = 10;
 
     [SerializeField] public float startingHealth;
     [SerializeField] public float movementSpeed;
@@ -32,6 +40,9 @@ public class EnemyScript : MonoBehaviour {
     void Start() {
         currentHealth = startingHealth;
         player = GameObject.Find("Player");
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        defaultColor = spriteRenderer.color;
+        hitColor = Color.grey;
         currentRotateSpeed = maxRotateSpeed;
     }
 
@@ -46,23 +57,59 @@ public class EnemyScript : MonoBehaviour {
                 currentHealth = 0;
                 break;
             case "Bullet":
+                currentPauseTime = amountOfPauseTimeOnHit; 
                 currentHealth = currentHealth - normalBulletDamage;
                 Destroy(collision.gameObject);
+                break;
+            case "Wall":
+                touchingWalls = true;
+                StartCoroutine(IfCollidingWithWall());
                 break;
             default: break;
         }
     }
 
+    public IEnumerator IfCollidingWithWall() {
+        yield return new WaitForSeconds(3f);
+        touchingWalls = false;
+        StopCoroutine(IfCollidingWithWall());
+    }
+
+    public void TurnLeft() {
+        transform.Rotate(Vector3.forward * currentRotateSpeed);
+    }
+    public void TurnLeft(float speed) {
+        transform.Rotate(Vector3.forward * speed);
+    }
+    public void TurnRight() {
+        transform.Rotate(Vector3.back * currentRotateSpeed);
+    }
+    public void TurnRight(float speed) {
+        transform.Rotate(Vector3.back * speed);
+    }
+
+    public void MoveForward(float speed) {
+        transform.position += transform.right * Time.deltaTime * speed;
+    }
+    public void MoveForward() {
+        transform.position += transform.right * Time.deltaTime * movementSpeed;
+    }
+
+    public bool isPaused() {
+        return currentPauseTime >= 0f;
+    }
+
+
     //getGameObjectAngle()
-    //Gets the angle between current object and parameter object
-    public float GetGameObjectAngle(GameObject player) {
-        Vector3 playerToEnemyDistance = player.transform.position;
-        playerToEnemyDistance.z = 0f;
+    //Gets the angle between current enemy object and parameter object
+    public float GetGameObjectAngle(GameObject otherObject) {
+        Vector3 objectToEnemyDistance = otherObject.transform.position;
+        objectToEnemyDistance.z = 0f;
 
-        playerToEnemyDistance.x = playerToEnemyDistance.x - transform.position.x;
-        playerToEnemyDistance.y = playerToEnemyDistance.y - transform.position.y;
+        objectToEnemyDistance.x = objectToEnemyDistance.x - transform.position.x;
+        objectToEnemyDistance.y = objectToEnemyDistance.y - transform.position.y;
 
-        float playerAngle = Mathf.Atan2(playerToEnemyDistance.y, playerToEnemyDistance.x) * Mathf.Rad2Deg;
+        float playerAngle = Mathf.Atan2(objectToEnemyDistance.y, objectToEnemyDistance.x) * Mathf.Rad2Deg;
 
         if (playerAngle < 0) {
             return 360 + playerAngle;
@@ -80,18 +127,7 @@ public class EnemyScript : MonoBehaviour {
         return maxRotateSpeed;
     }
 
-    public bool ChangedAxes(float playerAngle) {
-        if((prevPlayerAngle <= 10 && prevPlayerAngle >= 0) && (playerAngle <= 360 && playerAngle >= 350) || (prevPlayerAngle <= 360 && prevPlayerAngle >= 350) && (playerAngle <= 10 && playerAngle >= 0)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public void DetermineDirection(float playerAngle) { //(playerAngle < 15f && playerAngle > 0f) || (playerAngle < 359.9999f && playerAngle > 340f)
-        if (ChangedAxes(playerAngle)) {
-            isRotatingRight = !isRotatingRight;
-        } else
        if (playerAngle > transform.rotation.eulerAngles.z) {
             isRotatingRight = false;
         } else if (playerAngle < transform.rotation.eulerAngles.z) {
@@ -101,17 +137,27 @@ public class EnemyScript : MonoBehaviour {
 
     //FaceOtherObject(){
     //Continuously rotate to face another object 
-    public void FaceOtherObject(float playerAngle) {
-        try {
-            currentRotateSpeed = CalcRotateSpeed(playerAngle, transform.rotation.eulerAngles.z, currentRotateSpeed, maxRotateSpeed);
-            DetermineDirection(playerAngle);
-            if (isRotatingRight) {
-                transform.Rotate(Vector3.back * currentRotateSpeed);//RIGHT
-            } else {
-                transform.Rotate(Vector3.forward * currentRotateSpeed);//LEFT
-            }
-        } catch (MissingReferenceException) { Debug.Log("Enemy could not find the player"); }
-        prevPlayerAngle = playerAngle;
+    public void FaceOtherObject() {
+        //try {
+        //    currentRotateSpeed = CalcRotateSpeed(playerAngle, transform.rotation.eulerAngles.z, currentRotateSpeed, maxRotateSpeed);
+        //    DetermineDirection(playerAngle);
+        //    if (isRotatingRight) {
+        //        transform.Rotate(Vector3.back * currentRotateSpeed);//RIGHT
+        //    } else {
+        //        transform.Rotate(Vector3.forward * currentRotateSpeed);//LEFT
+        //    }
+        //} catch (MissingReferenceException) { Debug.Log("Enemy could not find the player"); }
+        //prevPlayerAngle = playerAngle;
+
+        Vector3 targetAngle = player.transform.position;
+        targetAngle.z = 0f;
+
+        Vector3 objectPos = transform.position;
+        targetAngle.x = targetAngle.x - objectPos.x;
+        targetAngle.y = targetAngle.y - objectPos.y;
+
+        float angle = Mathf.Atan2(targetAngle.y, targetAngle.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     public void DetermineIfDestroyed() {

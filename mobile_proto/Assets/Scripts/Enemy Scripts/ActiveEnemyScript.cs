@@ -5,12 +5,20 @@ using UnityEngine;
 public class ActiveEnemyScript : EnemyScript {
 
     void ActiveMovement() {
-        FaceOtherObject(GetGameObjectAngle(player));
+        transform.position += transform.right * Time.deltaTime * movementSpeed;
+        FaceOtherObject();
     }
 
     void FixedUpdate() {
         DetermineIfDestroyed();
-        ActiveMovement();
-        transform.position += transform.right * Time.deltaTime * movementSpeed;
+        if (!isPaused()) {
+            ActiveMovement();
+            spriteRenderer.color = defaultColor;
+        } else {
+            spriteRenderer.color = hitColor;
+            currentPauseTime -= Time.deltaTime;
+        }
     }
+
+    
 }

@@ -11,6 +11,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject enemy2Prefab; //Basic enemy2 prefab
     public GameObject enemy3Prefab; //Basic enemy2 prefab
     public GameObject portalPrefab;
+    public GameObject levelFinishTextPrefab;
 
     public static int level = 1;//Current Level
     private int amountOfEnemies; //Number of enemies per round
@@ -25,10 +26,10 @@ public class GameManagerScript : MonoBehaviour
     public void Start()
     {
         levelText.text = levelText.text + level;
-        for(amountOfEnemies = 0; amountOfEnemies < level; amountOfEnemies = amountOfEnemies + 3) {//= amountOfEnemies + 2
+        for(amountOfEnemies = 0; amountOfEnemies < level; amountOfEnemies = amountOfEnemies + 1) {
             Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-           Instantiate(enemy2Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-           Instantiate(enemy3Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            //Instantiate(enemy2Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            //Instantiate(enemy3Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
         }
     }
 
@@ -39,7 +40,7 @@ public class GameManagerScript : MonoBehaviour
     }
 
     public void createLevelsEnemies() {
-
+        //LEVEL SCALING HERE
     }
 
     //FixedUpdate()
@@ -50,6 +51,7 @@ public class GameManagerScript : MonoBehaviour
         if (EnemyScript.destroyedEnemies == amountOfEnemies) {
             EnemyScript.destroyedEnemies = 0;
             Instantiate(portalPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+            Instantiate(levelFinishTextPrefab);
             level++;
         }
     }

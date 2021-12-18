@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
-    public Rigidbody2D rb;
     public Touch touch;//For debug touch tests
     public bool isLeftPressed;//Main variables for left and right movement with touchscreen
     public bool isRightPressed;
@@ -12,7 +11,6 @@ public class PlayerMovement : MonoBehaviour {
     public SpriteRenderer spriteRenderer;//For changing texture color
     public Color defaultColor;
     public ShieldScript shieldScript;
-
 
     public static float health = 5;//Main health bar
 
@@ -28,7 +26,6 @@ public class PlayerMovement : MonoBehaviour {
     //START()
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
         shieldScript = GetComponentInChildren<ShieldScript>();
@@ -61,13 +58,7 @@ public class PlayerMovement : MonoBehaviour {
             Debug.Log("Not touching the screen");//YUP
         }
     }
-    void keyboardMovement() {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector3 tempVect = new Vector3(h, v, 0);
-        tempVect = tempVect.normalized * 0.1f;
-        rb.MovePosition(transform.position + tempVect);
-    }
+
     void keyboardTurning() {
         if (Input.GetKey("a")) {
             transform.Rotate(Vector3.forward * rotateSpeed);
@@ -120,9 +111,9 @@ public class PlayerMovement : MonoBehaviour {
 
     //HEALTH MODIFIERS
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.tag == "Wall") {
-            health = 0;
-        }
+        //if(collision.gameObject.tag == "Wall") {
+        //    health = 0;
+        //}
         if (currentInvincibilityTime <= 0 && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")) {
             loseHealth(1f);
             currentInvincibilityTime = amountOfInvincibleTimeOnHit;
@@ -149,6 +140,5 @@ public class PlayerMovement : MonoBehaviour {
         }
         keyboardTurning();
         //touchscreenMovement();
-        // keyboardMovement();
     }
 }
