@@ -343,7 +343,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   startingHealth: 3
   movementSpeed: 2
-  maxRotateSpeed: 3
+  maxRotateSpeed: 2
 --- !u!114 &3608333411454433256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
-  startingHealth: 4
-  movementSpeed: 3
-  maxRotateSpeed: 3
+  startingHealth: 3
+  movementSpeed: 2
+  maxRotateSpeed: 2

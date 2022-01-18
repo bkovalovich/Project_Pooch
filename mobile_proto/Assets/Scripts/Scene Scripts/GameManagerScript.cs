@@ -27,9 +27,9 @@ public class GameManagerScript : MonoBehaviour
     {
         levelText.text = levelText.text + level;
         for(amountOfEnemies = 0; amountOfEnemies < level; amountOfEnemies = amountOfEnemies + 1) {
-            Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            //Instantiate(enemy2Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            //Instantiate(enemy3Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            //Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            Instantiate(enemy2Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+           // Instantiate(enemy3Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
         }
     }
 

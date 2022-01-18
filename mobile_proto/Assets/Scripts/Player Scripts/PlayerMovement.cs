@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
-    public Touch touch;//For debug touch tests
+    public Touch touch;//For
+                       //touch tests
     public bool isLeftPressed;//Main variables for left and right movement with touchscreen
     public bool isRightPressed;
     private float currentInvincibilityTime = 0;//How much invincibility you have left
@@ -111,7 +112,7 @@ public class PlayerMovement : MonoBehaviour {
 
     //HEALTH MODIFIERS
     private void OnTriggerEnter2D(Collider2D collision) {
-        //if(collision.gameObject.tag == "Wall") {
+        //if (collision.gameObject.tag == "Wall") {
         //    health = 0;
         //}
         if (currentInvincibilityTime <= 0 && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")) {

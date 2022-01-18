@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f0ddf445a897846ac50e0349a5739d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
   startingHealth: 2
   movementSpeed: 3
   maxRotateSpeed: 3
@@ -29,7 +30,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 7703510280849311789}
   bulletprefab: {fileID: 2652766954633055318, guid: a74b5cfb0fea92c4e91920b2e7dd9f31, type: 3}
-  rateOfFire: 0.5
+  rateOfFire: 0.8
 --- !u!1 &7650360934322456462
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,8 +69,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 255728191701967921, guid: afdb22ebc45b18f47a8cb3a5830694e7, type: 3}
+      propertyPath: movementSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 255728191701967921, guid: afdb22ebc45b18f47a8cb3a5830694e7, type: 3}
+      propertyPath: maxRotateSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 255728191701967921, guid: afdb22ebc45b18f47a8cb3a5830694e7, type: 3}
       propertyPath: startingHealth
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1126682637515794376, guid: afdb22ebc45b18f47a8cb3a5830694e7, type: 3}
       propertyPath: m_Radius

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f0ddf445a897846ac50e0349a5739d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
   startingHealth: 2
   movementSpeed: 5
   maxRotateSpeed: 2
@@ -27,8 +28,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c934519d94bdf4468883eaeca766917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 1
-  movementSpeed: 4
+  spriteRenderer: {fileID: 0}
+  startingHealth: 2
+  movementSpeed: 5
   maxRotateSpeed: 2
 --- !u!1001 &3840555419846211907
 PrefabInstance:
