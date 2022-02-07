@@ -97,61 +97,38 @@ public class EnemyScript : MonoBehaviour {
         }
     }
     protected void ActiveMovement() {
-        transform.position += transform.right * Time.deltaTime * movementSpeed;
-        FaceOtherObject();
+        try {
+            transform.position += transform.right * Time.deltaTime * movementSpeed;
+            currentRotateSpeed = GetGameObjectAngle(player) - transform.rotation.eulerAngles.z;
+            transform.Rotate(Vector3.forward * currentRotateSpeed);
+        } catch (MissingReferenceException) { Debug.Log("Hyper enemy could not find the player"); }
     }
 
-    //OnTriggerEnter2D()
-    private void OnTriggerEnter2D(Collider2D collision) {
-        currentlyColliding = true;
-        switch (collision.gameObject.tag) {
-            case "ChargeBullet":
-                currentHealth = currentHealth - chargeBulletDamage;
-                break;
-            case "Shield":
-                currentHealth = 0;
-                break;
-            case "Bullet":
-                currentPauseTime = amountOfPauseTimeOnHit; 
-                currentHealth = currentHealth - normalBulletDamage;
-                Destroy(collision.gameObject);
-                break;
-            case "Wall":
-                touchingWalls = true;
-                break;
-            default: 
-                break;
-        }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Wall") {
-            touchingWalls = false;
-        }
-    }
+    //FaceOtherObject(){
+    //Continuously rotate to face another object 
+    public void FaceOtherObject() {
+        try {
+            playerAngle = GetGameObjectAngle(player);
+            currentRotateSpeed = CalcRotateSpeed(playerAngle, transform.rotation.eulerAngles.z, currentRotateSpeed, maxRotateSpeed);
+            DetermineDirection(playerAngle);
+            if (isRotatingRight) {
+                transform.Rotate(Vector3.back * currentRotateSpeed);//RIGHT
+            } else {
+                transform.Rotate(Vector3.forward * currentRotateSpeed);//LEFT
+            }
+        } catch (MissingReferenceException) { Debug.Log("Enemy could not find the player"); }
+        prevPlayerAngle = playerAngle;
 
-    public void TurnLeft() {
-        transform.Rotate(Vector3.forward * currentRotateSpeed);
-    }
-    public void TurnLeft(float speed) {
-        transform.Rotate(Vector3.forward * speed);
-    }
-    public void TurnRight() {
-        transform.Rotate(Vector3.back * currentRotateSpeed);
-    }
-    public void TurnRight(float speed) {
-        transform.Rotate(Vector3.back * speed);
-    }
+        //Vector3 targetAngle = player.transform.position;
+        //targetAngle.z = 0f;
 
-    public void MoveForward(float speed) {
-        transform.position += transform.right * Time.deltaTime * speed;
-    }
-    public void MoveForward() {
-        transform.position += transform.right * Time.deltaTime * movementSpeed;
-    }
+        //Vector3 objectPos = transform.position;
+        //targetAngle.x = targetAngle.x - objectPos.x;
+        //targetAngle.y = targetAngle.y - objectPos.y;
 
-    public bool isPaused() {
-        return currentPauseTime >= 0f;
+        //float angle = Mathf.Atan2(targetAngle.y, targetAngle.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     //getGameObjectAngle()
@@ -182,41 +159,63 @@ public class EnemyScript : MonoBehaviour {
     }
 
     public void DetermineDirection(float playerAngle) { //(playerAngle < 15f && playerAngle > 0f) || (playerAngle < 359.9999f && playerAngle > 340f)
-        float gap = Mathf.Abs(prevPlayerAngle - playerAngle);
-        if (/*(gap < 5f && gap > 0f) ||*/ (gap < 359.9999f && gap > 355f)) {
-            isRotatingRight = !isRotatingRight;
-        }
-       if (playerAngle > transform.rotation.eulerAngles.z) {
+        if (playerAngle > transform.rotation.eulerAngles.z) {
             isRotatingRight = false;
         } else if (playerAngle < transform.rotation.eulerAngles.z) {
             isRotatingRight = true;
         }
     }
 
-    //FaceOtherObject(){
-    //Continuously rotate to face another object 
-    public void FaceOtherObject() { 
-        try {
-            playerAngle = GetGameObjectAngle(player);
-            currentRotateSpeed = CalcRotateSpeed(playerAngle, transform.rotation.eulerAngles.z, currentRotateSpeed, maxRotateSpeed);
-            DetermineDirection(playerAngle);
-            if (isRotatingRight) {
-                transform.Rotate(Vector3.back * currentRotateSpeed);//RIGHT
-            } else {
-                transform.Rotate(Vector3.forward * currentRotateSpeed);//LEFT
-            }
-        } catch (MissingReferenceException) { Debug.Log("Enemy could not find the player"); }
-        prevPlayerAngle = playerAngle;
+    //OnTriggerEnter2D()
+    private void OnTriggerEnter2D(Collider2D collision) {
+        currentlyColliding = true;
+        switch (collision.gameObject.tag) {
+            case "ChargeBullet":
+                currentHealth = currentHealth - chargeBulletDamage;
+                break;
+            case "Shield":
+                currentHealth = 0;
+                break;
+            case "Bullet":
+                currentPauseTime = amountOfPauseTimeOnHit; 
+                currentHealth = currentHealth - normalBulletDamage;
+                Destroy(collision.gameObject);
+                break;
+            case "Wall":
+                touchingWalls = true;
+                break;
+            default: 
+                break;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Wall") {
+            touchingWalls = false;
+        }
+    }
 
-        //Vector3 targetAngle = player.transform.position;
-        //targetAngle.z = 0f;
+    public void TurnLeft() {
+        transform.Rotate(Vector3.forward * currentRotateSpeed);
+    }
+    public void TurnLeft(float speed) {
+        transform.Rotate(Vector3.forward * speed);
+    }
+    public void TurnRight() {
+        transform.Rotate(Vector3.back * currentRotateSpeed);
+    }
+    public void TurnRight(float speed) {
+        transform.Rotate(Vector3.back * speed);
+    }
 
-        //Vector3 objectPos = transform.position;
-        //targetAngle.x = targetAngle.x - objectPos.x;
-        //targetAngle.y = targetAngle.y - objectPos.y;
+    public void MoveForward(float speed) {
+        transform.position += transform.right * Time.deltaTime * speed;
+    }
+    public void MoveForward() {
+        transform.position += transform.right * Time.deltaTime * movementSpeed;
+    }
 
-        //float angle = Mathf.Atan2(targetAngle.y, targetAngle.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    public bool isPaused() {
+        return currentPauseTime >= 0f;
     }
 
     public void DetermineIfDestroyed() {

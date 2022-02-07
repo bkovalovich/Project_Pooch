@@ -4,30 +4,11 @@ using UnityEngine;
 
 public class ActiveEnemyScript : EnemyScript {
 
-    private bool onScreen;
-
-    void OnBecameVisible() {
-        onScreen = true;
-    }
-
-    void OnBecameInvisible() {
-        onScreen = false;
-    }
-
-
     void FixedUpdate() {
         DetermineIfDestroyed();
         if (!isPaused()) {
+            ActiveMovement();
             spriteRenderer.color = defaultColor;
-            switch (onScreen) {
-                case true:
-                    ActiveMovement();
-                    break;
-                case false:
-                    PassiveMovement();
-                    break;
-                default: break;
-            }
         } else {
             spriteRenderer.color = hitColor;
             currentPauseTime -= Time.deltaTime;
