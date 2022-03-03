@@ -112,9 +112,9 @@ public class PlayerMovement : MonoBehaviour {
 
     //HEALTH MODIFIERS
     private void OnTriggerEnter2D(Collider2D collision) {
-        //if (collision.gameObject.tag == "Wall") {
-        //    health = 0;
-        //}
+        if (collision.gameObject.tag == "Wall") {
+            health = 0;
+        }
         if (currentInvincibilityTime <= 0 && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")) {
             loseHealth(1f);
             currentInvincibilityTime = amountOfInvincibleTimeOnHit;

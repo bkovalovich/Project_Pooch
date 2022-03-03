@@ -26,7 +26,6 @@ public class ActiveEnemyScript : EnemyScript {
                 case false:
                     PassiveMovement();
                     break;
-                default: break;
             }
         } else {
             spriteRenderer.color = hitColor;

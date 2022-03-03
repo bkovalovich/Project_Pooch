@@ -41,7 +41,6 @@ public class EnemyScript : MonoBehaviour {
     public float HealthRatio {
         get { return currentHealth / startingHealth; }
     }
-
     public Vector3 EnemyPosition {
         get { return transform.position; }
     }
