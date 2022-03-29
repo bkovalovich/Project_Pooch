@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4622083464116915742}
   - component: {fileID: 6641045262634481752}
   - component: {fileID: 2296029347296515400}
-  - component: {fileID: -7184272028607520922}
   - component: {fileID: 4722840281800191744}
   m_Layer: 0
   m_Name: NextLevelPortal
@@ -124,17 +123,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 10
---- !u!210 &-7184272028607520922
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711387511938367422}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
 --- !u!114 &4722840281800191744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48e71669b6e5c74e83669ed87036681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationTime: 1
 --- !u!1 &4263170085944142710
 GameObject:
   m_ObjectHideFlags: 0

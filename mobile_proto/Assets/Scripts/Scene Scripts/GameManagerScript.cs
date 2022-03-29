@@ -7,24 +7,30 @@ using UnityEngine.UI;
 //Manages level progression within the main game scene
 public class GameManagerScript : MonoBehaviour
 {
+    public float modifiedGameSpeed = 1;
+
     public GameObject enemyPrefab; //Basic enemy prefab
     public GameObject enemy2Prefab; //Basic enemy2 prefab
     public GameObject enemy3Prefab; //Basic enemy3 prefab
     public GameObject enemy4Prefab; //Basic enemy4 prefab
-    public GameObject enemy5Prefab; //Basic enemy4 prefab
-    public GameObject enemy6Prefab; //Basic enemy4 prefab
+    public GameObject enemy5Prefab; //Basic enemy5 prefab
+    public GameObject enemy6Prefab; //Basic enemy5 prefab
+    public GameObject enemy7Prefab; //Basic enemy5 prefab
+    public GameObject enemy8Prefab; //Basic enemy5 prefab
+    public GameObject enemy9Prefab; //Basic enemy9 prefab
     public GameObject portalPrefab;
     public GameObject levelFinishTextPrefab;
     public GameObject backgroundMusic;
 
     public static int level = 1;//Current Level
     private int amountOfEnemies; //Number of enemies per round
+    private bool levelBeaten = false;
 
-    [SerializeField] public int range; //Size of possible spawns 
-    [SerializeField] public GameObject background; //In order to maintain spawn on the map
-    [SerializeField] public Text levelText;
-    [SerializeField] public Text playerHealthText;
-    [SerializeField] public Text EnemiesLeftText;
+    public int range; //Size of possible spawns 
+    public GameObject background; //In order to maintain spawn on the map
+    public Text levelText;
+    public Text playerHealthText;
+    public Text EnemiesLeftText;
 
     void Awake() {
     }
@@ -40,7 +46,7 @@ public class GameManagerScript : MonoBehaviour
             Instantiate(enemy3Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
         }
         if (Random.Range(0, 6) == 1) {
-            Instantiate(enemy6Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            Instantiate(enemy9Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
             amountOfEnemies++;
         }
         if (level >= 5) {
@@ -66,16 +72,18 @@ public class GameManagerScript : MonoBehaviour
     //FixedUpdate()
     //Starts next round if all enemies were destroyed
     public void FixedUpdate() {
-        //Debug.Log()
+        Time.timeScale = modifiedGameSpeed;
+       
         playerHealthText.text = "Health: " + PlayerMovement.health.ToString();
         int enemiesLeft = amountOfEnemies - EnemyScript.destroyedEnemies;
         EnemiesLeftText.text = "CATS LEFT: " + enemiesLeft;
-        if (EnemyScript.destroyedEnemies == amountOfEnemies) {
-            EnemiesLeftText.text = "Proceed to wormhole";
-            EnemyScript.destroyedEnemies = 0;
+
+        if (EnemyScript.destroyedEnemies == amountOfEnemies && !levelBeaten) {
+            levelBeaten = true;
             Instantiate(portalPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
             Instantiate(levelFinishTextPrefab);
             level++;
         }
+        
     }
 }
