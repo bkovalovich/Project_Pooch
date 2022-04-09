@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 417316819008107252, guid: 349acb3a24ecdfd4db4419085ab0bb79, type: 3}
       propertyPath: movementSpeed
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 417316819008107252, guid: 349acb3a24ecdfd4db4419085ab0bb79, type: 3}
       propertyPath: maxRotateSpeed
@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6298699504877402873, guid: 349acb3a24ecdfd4db4419085ab0bb79, type: 3}
       propertyPath: m_Name
-      value: Enemy_Proto#4
+      value: Enemy_Proto#6
       objectReference: {fileID: 0}
     - target: {fileID: 6393899663869900932, guid: 349acb3a24ecdfd4db4419085ab0bb79, type: 3}
       propertyPath: m_Sprite

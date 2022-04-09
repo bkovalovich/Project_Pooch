@@ -10,14 +10,7 @@ public class GameManagerScript : MonoBehaviour
     public float modifiedGameSpeed = 1;
 
     public GameObject enemyPrefab; //Basic enemy prefab
-    public GameObject enemy2Prefab; //Basic enemy2 prefab
-    public GameObject enemy3Prefab; //Basic enemy3 prefab
-    public GameObject enemy4Prefab; //Basic enemy4 prefab
-    public GameObject enemy5Prefab; //Basic enemy5 prefab
-    public GameObject enemy6Prefab; //Basic enemy5 prefab
-    public GameObject enemy7Prefab; //Basic enemy5 prefab
-    public GameObject enemy8Prefab; //Basic enemy5 prefab
-    public GameObject enemy9Prefab; //Basic enemy9 prefab
+
     public GameObject portalPrefab;
     public GameObject levelFinishTextPrefab;
     public GameObject backgroundMusic;
@@ -40,23 +33,27 @@ public class GameManagerScript : MonoBehaviour
     //Creates enemies at random positions
     public void Start() {
         levelText.text = levelText.text + level;
-        for (amountOfEnemies = 0; amountOfEnemies < level; amountOfEnemies = amountOfEnemies + 3) {
+        for (amountOfEnemies = 0; amountOfEnemies < level; amountOfEnemies++) {
             Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            Instantiate(enemy2Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            Instantiate(enemy3Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
         }
-        if (Random.Range(0, 6) == 1) {
-            Instantiate(enemy9Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            amountOfEnemies++;
-        }
+        //if (Random.Range(0, 6) == 1) {
+        //    Instantiate(enemy9Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        //    amountOfEnemies++;
+        //}
         if (level >= 5) {
-            Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            Instantiate(enemy4Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            Instantiate(enemy4Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            amountOfEnemies = amountOfEnemies + 5;
+            //Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            //Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            //Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            //Instantiate(enemy4Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            //Instantiate(enemy4Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            //Instantiate(enemy6Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+            //amountOfEnemies = amountOfEnemies + 6;
         }
+        //if (level >= 10) {
+        //    Instantiate(enemy7Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        //    amountOfEnemies++;
+
+        //}
     }
 
     //RandomMapPosition()

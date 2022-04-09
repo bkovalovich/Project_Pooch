@@ -6,36 +6,42 @@ using System;
 
 //Handles behavior for basic enemies
 public class EnemyScript : MonoBehaviour {
+
+    [SerializeField] protected float startingHealth;
+    [SerializeField] protected float movementSpeed;
+    [SerializeField] protected float maxRotateSpeed;
+
+    //Determine if dead fields
+    public static int destroyedEnemies = 0;
     protected float currentHealth;
+
+    //Face player fields
     protected float currentRotateSpeed;
-    protected float prevPlayerAngle;
-    protected bool isRotatingRight;
+    protected static GameObject player;
+
+    //Hitstun fields
     protected float currentPauseTime = 0;
     protected float amountOfPauseTimeOnHit = 0.06f;
-
     protected Color defaultColor;
     protected Color hitColor;
-    protected float playerAngle;
-    protected bool currentlyColliding;
+    protected SpriteRenderer spriteRenderer;//For changing texture color
+
+    //Staying in arena fields
     protected bool touchingWalls;
-    //protected Renderer mainRenderer;
+    protected bool justEscapedWalls = false;
 
-    public static int destroyedEnemies = 0;
-    public static GameObject player;
-    public SpriteRenderer spriteRenderer;//For changing texture color
-
+    //Damage recieved by bullet fields
     private float normalBulletDamage = 1;
     private float chargeBulletDamage = 10;
 
-    [SerializeField] public float startingHealth;
-    [SerializeField] public float movementSpeed;
-    [SerializeField] public float maxRotateSpeed;
-
+    //Passive movement fields
     protected int choosingMethod = 0;
     protected int maxAmountofMethods = 4;
-    protected float currentTime = 0;
-    protected float maxTime = 3f;
-    protected bool justEscapedWalls = false;
+    protected float currentPassiveMovementTime = 0;
+    protected float maxPassiveMovementTime = 3f;
+
+    //Active movement fields
+    private bool onScreen;
 
     //PROPERTIES
     public float HealthRatio {
@@ -52,147 +58,151 @@ public class EnemyScript : MonoBehaviour {
         defaultColor = spriteRenderer.color;
         hitColor = Color.grey;
         currentRotateSpeed = maxRotateSpeed;
-       // mainRenderer = GetComponent<Renderer>();
     }
 
+    //ChooseRandomMethod()
+    //Assigns a random value to chooseMethod every 3 seconds unless the object just left the walls of the arena
     protected void ChooseRandomMethod() {
         if (justEscapedWalls) {
             justEscapedWalls = false;
             choosingMethod = 2;
             return;
         }
-        if (currentTime <= 0) {
-            currentTime = maxTime;
+        if (currentPassiveMovementTime <= 0) {
+            currentPassiveMovementTime = maxPassiveMovementTime;
             choosingMethod = UnityEngine.Random.Range(0, maxAmountofMethods);
         }
     }
 
+    //PassiveMovement()
+    //Selects a random action every 3 seconds and prevents the enemy from leaving the arena
     protected void PassiveMovement() {
-        if (touchingWalls) {
-            justEscapedWalls = true;
-            TurnLeft(3f);
-            MoveForward(5);
-        } else {
-            ChooseRandomMethod();
-            currentTime -= Time.deltaTime;
-            switch (choosingMethod) {
-                case 0:
-                    MoveForward();
-                    TurnLeft();
-                    break;
-                case 1:
-                    TurnRight();
-                    break;
-                case 2:
-                    MoveForward();
-                    break;
-                case 3:
-                    TurnLeft();
-                    MoveForward();
-                    break;
-                default: break;
+        DetermineIfDestroyed();
+        if (!isPaused()) {
+            if (touchingWalls) {
+                justEscapedWalls = true;
+                TurnLeft(3f);
+                MoveForward(5);
+            } else {
+                ChooseRandomMethod();
+                currentPassiveMovementTime -= Time.deltaTime;
+                switch (choosingMethod) {
+                    case 0:
+                        MoveForward();
+                        TurnLeft();
+                        break;
+                    case 1:
+                        TurnRight();
+                        break;
+                    case 2:
+                        MoveForward();
+                        break;
+                    case 3:
+                        TurnLeft();
+                        MoveForward();
+                        break;
+                    default: break;
 
+                }
             }
+            spriteRenderer.color = defaultColor;
+        } else {
+            spriteRenderer.color = hitColor;
+            currentPauseTime -= Time.deltaTime;
         }
+
+
     }
-    protected void ActiveMovement() {
+
+    //FaceOtherObject()
+    //Rotates current object to face the player
+    protected void FacePlayer() {
         try {
             transform.position += transform.right * Time.deltaTime * movementSpeed;
             currentRotateSpeed = GetGameObjectAngle(player) - transform.rotation.eulerAngles.z;
             transform.Rotate(Vector3.forward * currentRotateSpeed);
-        } catch (MissingReferenceException) { Debug.Log("Hyper enemy could not find the player"); }
+        } catch (MissingReferenceException) { Debug.Log("Active enemy could not find the player"); }
     }
 
-
-    //FaceOtherObject(){
-    //Continuously rotate to face another object 
-    public void FaceOtherObject() {
-        try {
-            playerAngle = GetGameObjectAngle(player);
-            currentRotateSpeed = CalcRotateSpeed(playerAngle, transform.rotation.eulerAngles.z, currentRotateSpeed, maxRotateSpeed);
-            DetermineDirection(playerAngle);
-            if (isRotatingRight) {
-                transform.Rotate(Vector3.back * currentRotateSpeed);//RIGHT
-            } else {
-                transform.Rotate(Vector3.forward * currentRotateSpeed);//LEFT
+    //ActiveMovement()
+    //Changes movement pattern based on if the player is onscreen
+    protected void ActiveMovement() {
+        DetermineIfDestroyed();
+        if (!isPaused()) {
+            spriteRenderer.color = defaultColor;
+            switch (onScreen) {
+                case true:
+                    FacePlayer();
+                    break;
+                case false:
+                    PassiveMovement();
+                    break;
             }
-        } catch (MissingReferenceException) { Debug.Log("Enemy could not find the player"); }
-        prevPlayerAngle = playerAngle;
-
-        //Vector3 targetAngle = player.transform.position;
-        //targetAngle.z = 0f;
-
-        //Vector3 objectPos = transform.position;
-        //targetAngle.x = targetAngle.x - objectPos.x;
-        //targetAngle.y = targetAngle.y - objectPos.y;
-
-        //float angle = Mathf.Atan2(targetAngle.y, targetAngle.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        } else {
+            spriteRenderer.color = hitColor;
+            currentPauseTime -= Time.deltaTime;
+        }
     }
 
     //getGameObjectAngle()
-    //Gets the angle between current enemy object and parameter object
+    //Returns the degree angle that the current object must rotate to in order to face the parameter object  
     public float GetGameObjectAngle(GameObject otherObject) {
-        Vector3 objectToEnemyDistance = otherObject.transform.position;
-        objectToEnemyDistance.z = 0f;
+        Vector3 objectToEnemyDistance = otherObject.transform.position; //Gets position
+        objectToEnemyDistance.z = 0f; //Prevents interference with other data
 
-        objectToEnemyDistance.x = objectToEnemyDistance.x - transform.position.x;
+        objectToEnemyDistance.x = objectToEnemyDistance.x - transform.position.x; //Gets the vert and horizontal distance between objects
         objectToEnemyDistance.y = objectToEnemyDistance.y - transform.position.y;
 
-        float playerAngle = Mathf.Atan2(objectToEnemyDistance.y, objectToEnemyDistance.x) * Mathf.Rad2Deg;
+        float playerAngle = Mathf.Atan2(objectToEnemyDistance.y, objectToEnemyDistance.x) * Mathf.Rad2Deg;//Calculates the tangent and converts it to degrees
 
-        if (playerAngle < 0) {
+        if (playerAngle < 0) { //Makes sure the angle doesn't subceed 0
             return 360 + playerAngle;
         }
         return playerAngle;
     }
 
-    //CalcRotateSpeed()
-    //Return a proper angle that does not cause jittering when turning
-    public float CalcRotateSpeed(float playerAngle, float objectAngle, float currentRotateSpeed, float maxRotateSpeed) {
-        float checkSmallerThanRotate = Mathf.Abs(playerAngle - objectAngle);
-        if (checkSmallerThanRotate < currentRotateSpeed) {
-            return checkSmallerThanRotate;
-        }
-        return maxRotateSpeed;
-    }
-
-    public void DetermineDirection(float playerAngle) { //(playerAngle < 15f && playerAngle > 0f) || (playerAngle < 359.9999f && playerAngle > 340f)
-        if (playerAngle > transform.rotation.eulerAngles.z) {
-            isRotatingRight = false;
-        } else if (playerAngle < transform.rotation.eulerAngles.z) {
-            isRotatingRight = true;
-        }
-    }
-
     //OnTriggerEnter2D()
+    //Handles collisions
     private void OnTriggerEnter2D(Collider2D collision) {
-        currentlyColliding = true;
         switch (collision.gameObject.tag) {
-            case "ChargeBullet":
+            case "ChargeBullet": //Hit by charge shot
                 currentHealth = currentHealth - chargeBulletDamage;
                 break;
-            case "Shield":
-                currentHealth = 0;
-                break;
-            case "Bullet":
+            //case "Shield": //Hit by player bubble shield
+            //    currentHealth = 0;
+            //    break;
+            case "Bullet": //Hit by player bullet
                 currentPauseTime = amountOfPauseTimeOnHit; 
                 currentHealth = currentHealth - normalBulletDamage;
                 Destroy(collision.gameObject);
                 break;
-            case "Wall":
+            case "Wall": //Interact with wall, initiate turn around behvaior
                 touchingWalls = true;
                 break;
             default: 
                 break;
         }
     }
+
+    //OnTriggerExit2D()
+    //Finishes wall interaction
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.tag == "Wall") {
             touchingWalls = false;
         }
     }
 
+    //If onscreen Methods
+    //Checks if objects are onscreen
+    void OnBecameVisible() {
+        onScreen = true;
+    }
+    void OnBecameInvisible() {
+        onScreen = false;
+    }
+
+    //Movement methods
+    //Can be called to quickly move object
     public void TurnLeft() {
         transform.Rotate(Vector3.forward * currentRotateSpeed);
     }
@@ -205,7 +215,6 @@ public class EnemyScript : MonoBehaviour {
     public void TurnRight(float speed) {
         transform.Rotate(Vector3.back * speed);
     }
-
     public void MoveForward(float speed) {
         transform.position += transform.right * Time.deltaTime * speed;
     }
@@ -213,10 +222,14 @@ public class EnemyScript : MonoBehaviour {
         transform.position += transform.right * Time.deltaTime * movementSpeed;
     }
 
+    //isPaused()
+    //Called when enemy is in hitstun
     public bool isPaused() {
         return currentPauseTime >= 0f;
     }
 
+    //DetermineIfDestroyed()
+    //Destroys object if health drops below 1
     public void DetermineIfDestroyed() {
         if (currentHealth <= 0) {
             destroyedEnemies++;

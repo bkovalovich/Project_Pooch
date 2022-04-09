@@ -21,7 +21,7 @@ public class ActiveEnemyScript : EnemyScript {
             spriteRenderer.color = defaultColor;
             switch (onScreen) {
                 case true:
-                    ActiveMovement();
+                    FacePlayer();
                     break;
                 case false:
                     PassiveMovement();

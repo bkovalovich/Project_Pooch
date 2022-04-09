@@ -1,0 +1,51 @@
+    //FaceOtherObject(){
+    //Legacy code
+    public void OLDFaceOtherObject() {
+        try {
+            playerAngle = GetGameObjectAngle(player);
+            currentRotateSpeed = CalcRotateSpeed(playerAngle, transform.rotation.eulerAngles.z, currentRotateSpeed, maxRotateSpeed);
+            DetermineDirection(playerAngle);
+            if (isRotatingRight) {
+                transform.Rotate(Vector3.back * currentRotateSpeed);//RIGHT
+            } else {
+                transform.Rotate(Vector3.forward * currentRotateSpeed);//LEFT
+            }
+        } catch (MissingReferenceException) { Debug.Log("Enemy could not find the player"); }
+        prevPlayerAngle = playerAngle;
+
+    }
+
+    //getGameObjectAngle()
+    //Legacy Code
+    public float GetGameObjectAngle(GameObject otherObject) {
+        Vector3 objectToEnemyDistance = otherObject.transform.position;
+        objectToEnemyDistance.z = 0f;
+
+        objectToEnemyDistance.x = objectToEnemyDistance.x - transform.position.x;
+        objectToEnemyDistance.y = objectToEnemyDistance.y - transform.position.y;
+
+        float playerAngle = Mathf.Atan2(objectToEnemyDistance.y, objectToEnemyDistance.x) * Mathf.Rad2Deg;
+
+        if (playerAngle < 0) {
+            return 360 + playerAngle;
+        }
+        return playerAngle;
+    }
+
+    //CalcRotateSpeed()
+    //Return a proper angle that does not cause jittering when turning
+    public float CalcRotateSpeed(float playerAngle, float objectAngle, float currentRotateSpeed, float maxRotateSpeed) {
+        float checkSmallerThanRotate = Mathf.Abs(playerAngle - objectAngle);
+        if (checkSmallerThanRotate < currentRotateSpeed) {
+            return checkSmallerThanRotate;
+        }
+        return maxRotateSpeed;
+    }
+
+    public void DetermineDirection(float playerAngle) { //(playerAngle < 15f && playerAngle > 0f) || (playerAngle < 359.9999f && playerAngle > 340f)
+        if (playerAngle > transform.rotation.eulerAngles.z) {
+            isRotatingRight = false;
+        } else if (playerAngle < transform.rotation.eulerAngles.z) {
+            isRotatingRight = true;
+        }
+    }
