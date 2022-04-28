@@ -123,6 +123,7 @@ public class PlayerMovement : MonoBehaviour {
     public void loseHealth(float damage) {
         health = health - damage;
     }
+
     public bool isInvincible() {
         return currentInvincibilityTime >= 0f;
     }

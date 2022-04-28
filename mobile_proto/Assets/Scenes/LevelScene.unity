@@ -1306,13 +1306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65cb01d2d36de3a4bb097ab82ca488e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modifiedGameSpeed: 1
-  enemyPrefab: {fileID: 7072090802444764090, guid: afdb22ebc45b18f47a8cb3a5830694e7, type: 3}
+  background: {fileID: 2133780770}
+  enemyPrefab: {fileID: 4780280189320289904, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
   portalPrefab: {fileID: 2711387511938367422, guid: cd223fac273e1c94191f0ae6048afbe0, type: 3}
   levelFinishTextPrefab: {fileID: 3442473890130739558, guid: 5eb6c46a1b4f4cd4abd3cd57ea93d17d, type: 3}
-  backgroundMusic: {fileID: 2046913727}
-  range: 25
-  background: {fileID: 2133780770}
   levelText: {fileID: 1130482313}
   playerHealthText: {fileID: 1699954465}
   EnemiesLeftText: {fileID: 947831154}
@@ -1599,7 +1596,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1370189202}
   - component: {fileID: 1370189205}
-  - component: {fileID: 1370189204}
   - component: {fileID: 1370189203}
   m_Layer: 0
   m_Name: MinimapCamera
@@ -1634,14 +1630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e57585e2caab7468198c3a5aa7d3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!81 &1370189204
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370189201}
-  m_Enabled: 1
 --- !u!20 &1370189205
 Camera:
   m_ObjectHideFlags: 0
@@ -2495,63 +2483,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6378796993395416654
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 264883703074773227, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4780280189320289904, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
-      propertyPath: m_Name
-      value: Enemy_Infantry
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
 --- !u!1001 &7154033795278286366
 PrefabInstance:
   m_ObjectHideFlags: 0

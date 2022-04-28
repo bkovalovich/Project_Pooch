@@ -7,23 +7,29 @@ using UnityEngine.UI;
 //Manages level progression within the main game scene
 public class GameManagerScript : MonoBehaviour
 {
-    public float modifiedGameSpeed = 1;
-
-    public GameObject enemyPrefab; //Basic enemy prefab
-
-    public GameObject portalPrefab;
-    public GameObject levelFinishTextPrefab;
-    public GameObject backgroundMusic;
-
     public static int level = 1;//Current Level
     private int amountOfEnemies; //Number of enemies per round
-    private bool levelBeaten = false;
+    private float modifiedGameSpeed = 1; //Sets the game speed
+    private bool levelBeaten = false;//Is set to true if the level has been beaten
 
-    public int range; //Size of possible spawns 
-    public GameObject background; //In order to maintain spawn on the map
-    public Text levelText;
-    public Text playerHealthText;
-    public Text EnemiesLeftText;
+    private int range; //Size of possible spawns 
+    [SerializeField] private GameObject background; //In order to maintain spawn on the map
+
+    // PREFABS
+    [SerializeField] public GameObject enemyPrefab;
+    //[SerializeField] private GameObject enemy2Prefab;
+    //[SerializeField] private GameObject enemy3Prefab;
+    //[SerializeField] private GameObject enemy4Prefab;
+    //[SerializeField] private GameObject enemy5Prefab;
+    //[SerializeField] private GameObject enemy6Prefab;
+    //[SerializeField] private GameObject enemy7Prefab;
+    [SerializeField] private GameObject portalPrefab;
+    [SerializeField] private GameObject levelFinishTextPrefab;
+
+    //MISC
+    [SerializeField] private Text levelText;
+    [SerializeField] private Text playerHealthText;
+    [SerializeField] private Text EnemiesLeftText;
 
     void Awake() {
     }
@@ -33,27 +39,25 @@ public class GameManagerScript : MonoBehaviour
     //Creates enemies at random positions
     public void Start() {
         levelText.text = levelText.text + level;
-        for (amountOfEnemies = 0; amountOfEnemies < level; amountOfEnemies++) {
-            Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-        }
-        //if (Random.Range(0, 6) == 1) {
-        //    Instantiate(enemy9Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-        //    amountOfEnemies++;
-        //}
-        if (level >= 5) {
-            //Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            //Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            //Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            //Instantiate(enemy4Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            //Instantiate(enemy4Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            //Instantiate(enemy6Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-            //amountOfEnemies = amountOfEnemies + 6;
-        }
-        //if (level >= 10) {
-        //    Instantiate(enemy7Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
-        //    amountOfEnemies++;
 
+        createLevelsEnemies();
+
+        //for (amountOfEnemies = 0; amountOfEnemies < level; amountOfEnemies++) {
+        //    Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+
+        //    if (level >= 5) {
+        //        Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        //        Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        //        Instantiate(enemy5Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        //        Instantiate(enemy6Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        //        amountOfEnemies = amountOfEnemies + 6;
+        //    }
+        //    if (level >= 10) {
+        //        Instantiate(enemy7Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        //        amountOfEnemies++;
+        //    }
         //}
+
     }
 
     //RandomMapPosition()
@@ -63,7 +67,11 @@ public class GameManagerScript : MonoBehaviour
     }
 
     public void createLevelsEnemies() {
-        //LEVEL SCALING HERE
+
+        Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        amountOfEnemies++;
+
+
     }
 
     //FixedUpdate()

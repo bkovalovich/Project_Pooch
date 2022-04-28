@@ -10,6 +10,8 @@ public class EnemyScript : MonoBehaviour {
     [SerializeField] protected float startingHealth;
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected float maxRotateSpeed;
+    [SerializeField] protected SpriteRenderer spriteRenderer;//For changing texture color
+
 
     //Determine if dead fields
     public static int destroyedEnemies = 0;
@@ -24,7 +26,6 @@ public class EnemyScript : MonoBehaviour {
     protected float amountOfPauseTimeOnHit = 0.06f;
     protected Color defaultColor;
     protected Color hitColor;
-    protected SpriteRenderer spriteRenderer;//For changing texture color
 
     //Staying in arena fields
     protected bool touchingWalls;
@@ -54,7 +55,6 @@ public class EnemyScript : MonoBehaviour {
     void Start() {
         currentHealth = startingHealth;
         player = GameObject.Find("Player");
-        spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
         hitColor = Color.grey;
         currentRotateSpeed = maxRotateSpeed;
