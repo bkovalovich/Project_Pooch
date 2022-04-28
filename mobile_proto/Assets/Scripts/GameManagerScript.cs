@@ -16,13 +16,12 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private GameObject background; //In order to maintain spawn on the map
 
     // PREFABS
-    [SerializeField] public GameObject enemyPrefab;
-    //[SerializeField] private GameObject enemy2Prefab;
-    //[SerializeField] private GameObject enemy3Prefab;
-    //[SerializeField] private GameObject enemy4Prefab;
-    //[SerializeField] private GameObject enemy5Prefab;
-    //[SerializeField] private GameObject enemy6Prefab;
-    //[SerializeField] private GameObject enemy7Prefab;
+    [SerializeField] public GameObject enemyInfantryPrefab;
+    [SerializeField] private GameObject enemyExplorerPrefab;
+    [SerializeField] private GameObject enemyGuardianPrefab;
+    [SerializeField] private GameObject enemyBarragePrefab;
+    [SerializeField] private GameObject enemyInfantryIIPrefab;
+
     [SerializeField] private GameObject portalPrefab;
     [SerializeField] private GameObject levelFinishTextPrefab;
 
@@ -68,7 +67,10 @@ public class GameManagerScript : MonoBehaviour
 
     public void createLevelsEnemies() {
 
-        Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+     //   Instantiate(enemyPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+      //  Instantiate(enemy2Prefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        Instantiate(enemyInfantryIIPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        //   amountOfEnemies = amountOfEnemies + 2;
         amountOfEnemies++;
 
 

@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyExplorerScript : EnemyScript
+public class EnemyGuardianScript : EnemyScript
 {
-
-    // Update is called once per frame
     void FixedUpdate()
     {
-        PassiveMovement();
+        ActiveMovement();
     }
 }

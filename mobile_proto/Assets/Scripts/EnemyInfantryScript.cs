@@ -7,6 +7,6 @@ public class EnemyInfantryScript : EnemyScript
     // Update is called once per frame
     void FixedUpdate()
     {
-        ActiveMovement();
+        HyperMovement();
     }
 }

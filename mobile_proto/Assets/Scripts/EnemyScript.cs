@@ -114,6 +114,18 @@ public class EnemyScript : MonoBehaviour {
 
     }
 
+    protected void HyperMovement() {
+        DetermineIfDestroyed();
+        if (!isPaused()){
+            spriteRenderer.color = defaultColor;
+            FacePlayer();
+        }
+        else{
+            spriteRenderer.color = hitColor;
+            currentPauseTime -= Time.deltaTime;
+        }
+    }
+
     //FaceOtherObject()
     //Rotates current object to face the player
     protected void FacePlayer() {
