@@ -7,11 +7,13 @@ using System;
 //Handles behavior for basic enemies
 public class EnemyScript : MonoBehaviour {
 
-    [SerializeField] protected float startingHealth;
+    //Stat fields
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected float maxRotateSpeed;
+    [SerializeField] protected float startingHealth;
+    [SerializeField] public int spawnCalcValue;
+   
     [SerializeField] protected SpriteRenderer spriteRenderer;//For changing texture color
-
 
     //Determine if dead fields
     public static int destroyedEnemies = 0;
@@ -50,6 +52,10 @@ public class EnemyScript : MonoBehaviour {
     }
     public Vector3 EnemyPosition {
         get { return transform.position; }
+    }
+    public int SpawnCalcValue
+    {
+        get { return spawnCalcValue; }
     }
 
     void Start() {

@@ -60,6 +60,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1797011640527940236, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: spawnCalcValue
+      value: 171
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797011640527940236, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
       propertyPath: startingHealth
       value: 3
       objectReference: {fileID: 0}
@@ -86,6 +90,18 @@ PrefabInstance:
     - target: {fileID: 6414658954244789661, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
       propertyPath: rateOfFire
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994317837877324552, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994317837877324552, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: m_Color.g
+      value: 0.98704123
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994317837877324552, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}

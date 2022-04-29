@@ -8,5 +8,6 @@ public class EnemyInfantryScript : EnemyScript
     void FixedUpdate()
     {
         HyperMovement();
+        
     }
 }

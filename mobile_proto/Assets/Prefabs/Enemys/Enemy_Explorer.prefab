@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77166faa8b9f6b249a458b190b3618c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 1
   movementSpeed: 5
   maxRotateSpeed: 3
+  startingHealth: 1
+  spawnCalcValue: 56
   spriteRenderer: {fileID: 5359744005752807868}
 --- !u!1001 &3130403898963511988
 PrefabInstance:
@@ -99,6 +100,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Explorer
       objectReference: {fileID: 0}
+    - target: {fileID: 4920406956827998506, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: rateOfFire
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920406956827998506, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: bulletprefab
+      value: 
+      objectReference: {fileID: 540887098248669991, guid: 64b1aa4a5a13cd0458670a63d9606128, type: 3}
     - target: {fileID: 6026634465907234662, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
       propertyPath: m_Color.b
       value: 0.029678345
@@ -111,6 +120,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6414658954244789661, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: rateOfFire
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6414658954244789661, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: bulletprefab
+      value: 
+      objectReference: {fileID: 540887098248669991, guid: 64b1aa4a5a13cd0458670a63d9606128, type: 3}
     - target: {fileID: 6994317837877324552, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
       propertyPath: m_Size.x
       value: 1.51
@@ -123,6 +140,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: ff573aee0737bf5408eed1e4e4be6203, type: 3}
+    - target: {fileID: 6994317837877324552, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: m_Color.b
+      value: 0.46226418
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994317837877324552, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: m_Color.g
+      value: 0.44219902
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994317837877324552, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
+      propertyPath: m_Color.r
+      value: 0.11120505
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1797011640527940236, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
