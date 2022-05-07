@@ -1071,7 +1071,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 796, y: -292}
+  m_AnchoredPosition: {x: 780, y: -292}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920826282
@@ -1353,12 +1353,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65cb01d2d36de3a4bb097ab82ca488e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amountOfEnemies: 0
   background: {fileID: 2133780770}
   enemyInfantryPrefab: {fileID: 4780280189320289904, guid: 6da184d7210034544aeaaf085f19ed60, type: 3}
   enemyExplorerPrefab: {fileID: 7577194514426762436, guid: ee56a0e784135db4ca047f7d5d343dee, type: 3}
   enemyGuardianPrefab: {fileID: 1687062525037197746, guid: 6d13b3b87d536db45be2f6416e67e8c8, type: 3}
   enemyBarragePrefab: {fileID: 4872039524075623738, guid: 6a2a2f655701fb14b8d0c75b49ca7cb0, type: 3}
   enemyInfantryIIPrefab: {fileID: 8789762780785729619, guid: ac7cb54dec3ff56428648d7e57079996, type: 3}
+  enemyPassengerPrefab: {fileID: 360454952028546805, guid: 2935ce54dadd6934aad7d71632a72645, type: 3}
   portalPrefab: {fileID: 2711387511938367422, guid: cd223fac273e1c94191f0ae6048afbe0, type: 3}
   levelFinishTextPrefab: {fileID: 3442473890130739558, guid: 5eb6c46a1b4f4cd4abd3cd57ea93d17d, type: 3}
   levelText: {fileID: 1130482313}
@@ -2006,7 +2008,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 836, y: 371}
+  m_AnchoredPosition: {x: 768, y: 371}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1699954465

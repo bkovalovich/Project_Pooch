@@ -58,7 +58,7 @@ public class EnemyScript : MonoBehaviour {
         get { return spawnCalcValue; }
     }
 
-    void Start() {
+    protected void Start() {
         currentHealth = startingHealth;
         player = GameObject.Find("Player");
         defaultColor = spriteRenderer.color;

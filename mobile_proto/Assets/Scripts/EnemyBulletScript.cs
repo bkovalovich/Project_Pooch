@@ -8,6 +8,7 @@ public class EnemyBulletScript : MonoBehaviour
         if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "ChargeBullet" || collision.gameObject.tag == "Shield" || collision.gameObject.tag == "Player") {
             Destroy(gameObject);
         }
-
     }
+
+
 }

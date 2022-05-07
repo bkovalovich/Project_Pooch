@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     public Color defaultColor;
     public ShieldScript shieldScript;
 
-    public static float health = 5;//Main health bar
+    public static float health = 100;//Main health bar
 
     [SerializeField] public float amountOfInvincibleTimeOnHit;//How much invinicbility you get on hit
     [SerializeField] public float movementSpeed;//How fast you move forward
