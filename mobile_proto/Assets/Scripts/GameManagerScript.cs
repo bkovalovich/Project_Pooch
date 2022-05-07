@@ -16,10 +16,11 @@ public class GameManagerScript : MonoBehaviour
     private int spawnCalcValueToBeAddedUpToMax = 0;
     private int amountOfEnemies; //Number of enemies per round
     private int range = 20; //Size of possible spawns 
+    private int smallestSpawnCalcValue = 56;
     [SerializeField] private GameObject background; //In order to maintain spawn on the map
 
     // PREFABS
-    [SerializeField] public GameObject enemyInfantryPrefab;
+    [SerializeField] private GameObject enemyInfantryPrefab;
     [SerializeField] private GameObject enemyExplorerPrefab;
     [SerializeField] private GameObject enemyGuardianPrefab;
     [SerializeField] private GameObject enemyBarragePrefab;
@@ -38,7 +39,6 @@ public class GameManagerScript : MonoBehaviour
     //Creates enemies at random positions
     public void Start() {
         levelText.text = levelText.text + level;
-
         enemyPrefabs = new GameObject[] { enemyInfantryPrefab, enemyExplorerPrefab, enemyGuardianPrefab, enemyBarragePrefab, enemyInfantryIIPrefab };
         spawnCalcMax = GenerateSpawnCalcMax();
         CreateLevelsEnemies();
@@ -60,7 +60,7 @@ public class GameManagerScript : MonoBehaviour
     //CreateLevelsEnemies()
     //Generate the correct amount of enemies per level
     public void CreateLevelsEnemies() {
-        while (spawnCalcValueToBeAddedUpToMax <= spawnCalcMax - 56) {
+        while (spawnCalcValueToBeAddedUpToMax <= spawnCalcMax - smallestSpawnCalcValue) {
             GameObject temp = enemyPrefabs[Random.Range(0, enemyPrefabs.Length - 1)];
             int tryNewCalcValue = spawnCalcValueToBeAddedUpToMax + temp.GetComponent<EnemyScript>().spawnCalcValue;
             if (tryNewCalcValue <= spawnCalcMax) {
