@@ -14,7 +14,7 @@ public class GameManagerScript : MonoBehaviour {
     public static int spawnCalcMax = 100;
     public int amountOfEnemies; //Number of enemies per round
     private int spawnCalcValueToBeAddedUpToMax = 0;
-    private int range = 20; //Size of possible spawns 
+    private float rangeOfPointsOnMap = 20; //Size of possible spawns 
     private int smallestSpawnCalcValue = 56;
     [SerializeField] private GameObject background; //In order to maintain spawn on the map
 
@@ -44,9 +44,9 @@ public class GameManagerScript : MonoBehaviour {
     //Creates enemies at random positions
     public void Start() {
         levelText.text = levelText.text + level;
-        enemyPrefabs = new GameObject[] { enemyInfantryPrefab, enemyExplorerPrefab, enemyGuardianPrefab, enemyBarragePrefab, enemyInfantryIIPrefab, enemyPassengerPrefab };
+        enemyPrefabs = new GameObject[] { enemyInfantryPrefab, enemyExplorerPrefab, enemyGuardianPrefab, enemyInfantryIIPrefab, enemyBarragePrefab, enemyPassengerPrefab };
         spawnCalcMax = GenerateSpawnCalcMax();
-        CreateLevelsEnemies(1);
+        CreateLevelsEnemies();
 
     }
 
@@ -56,12 +56,27 @@ public class GameManagerScript : MonoBehaviour {
         return (int)((float)spawnCalcMax * 1.3f);
     }
 
+    //isSpawningTooClose()
+    //returns true if the spawn point will be too close for the player to react to
+    private bool isSpawningTooClose(float x, float y) {
+        return (x > 14 || x < -14) || (y > 6.7f || y < -13);//TRUE, CAN SPAWN THERE
+    } 
+
     //RandomMapPosition()
     //Returns a random position on the map
     public Vector3 RandomMapPosition() {
-        return new Vector3(Random.Range(background.transform.position.x - range, background.transform.position.x + range), Random.Range(background.transform.position.y - range, background.transform.position.y + range), 0f);
+        float xSpawnValues = Random.Range(background.transform.position.x - rangeOfPointsOnMap, background.transform.position.x + rangeOfPointsOnMap);
+        float ySpawnValues = Random.Range(background.transform.position.y - rangeOfPointsOnMap, background.transform.position.y + rangeOfPointsOnMap);
+        while(!isSpawningTooClose(xSpawnValues, ySpawnValues))
+        {
+             xSpawnValues = Random.Range(background.transform.position.x - rangeOfPointsOnMap, background.transform.position.x + rangeOfPointsOnMap);
+             ySpawnValues = Random.Range(background.transform.position.y - rangeOfPointsOnMap, background.transform.position.y + rangeOfPointsOnMap);
+        }
+        return new Vector3(xSpawnValues, ySpawnValues, 0f);
     }
 
+    //CreateLevelEnemies()
+    //FOR TESTING
     public void CreateLevelsEnemies(int i) {
         Instantiate(enemyPassengerPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
         amountOfEnemies++;
@@ -72,7 +87,7 @@ public class GameManagerScript : MonoBehaviour {
     //Generate the correct amount of enemies per level
     public void CreateLevelsEnemies() {
         while (spawnCalcValueToBeAddedUpToMax <= spawnCalcMax - smallestSpawnCalcValue) {
-            GameObject temp = enemyPrefabs[Random.Range(0, enemyPrefabs.Length - 1)];
+            GameObject temp = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];//Range has an int overload that is max exclusive -_-
             int tryNewCalcValue = spawnCalcValueToBeAddedUpToMax + temp.GetComponent<EnemyScript>().spawnCalcValue;
             if (tryNewCalcValue <= spawnCalcMax) {
                 Instantiate(temp, RandomMapPosition(), new Quaternion(0, 0, 0, 0));

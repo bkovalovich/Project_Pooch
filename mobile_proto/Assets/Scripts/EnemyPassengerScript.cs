@@ -17,7 +17,6 @@ public class EnemyPassengerScript : EnemyScript
 
     new protected void Start() {
         base.Start();
-        Debug.Log("PASSENGER SPAWNED");
         gameManager = GameObject.Find("GameManager");
         gameManagerScript = gameManager.GetComponent<GameManagerScript>();
     }

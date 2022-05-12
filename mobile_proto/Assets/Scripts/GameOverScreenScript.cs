@@ -7,6 +7,7 @@ public class GameOverScreenScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManagerScript.spawnCalcMax = 100;
         GameManagerScript.level = 1;
         EnemyScript.destroyedEnemies = 0;
         PlayerMovement.health = 5;

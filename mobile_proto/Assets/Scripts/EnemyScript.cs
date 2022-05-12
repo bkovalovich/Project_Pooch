@@ -46,6 +46,9 @@ public class EnemyScript : MonoBehaviour {
     //Active movement fields
     private bool onScreen;
 
+    //Health Bar fields
+    [SerializeField] protected GameObject healthBar;
+
     //PROPERTIES
     public float HealthRatio {
         get { return currentHealth / startingHealth; }
@@ -53,8 +56,7 @@ public class EnemyScript : MonoBehaviour {
     public Vector3 EnemyPosition {
         get { return transform.position; }
     }
-    public int SpawnCalcValue
-    {
+    public int SpawnCalcValue {
         get { return spawnCalcValue; }
     }
 
@@ -64,6 +66,11 @@ public class EnemyScript : MonoBehaviour {
         defaultColor = spriteRenderer.color;
         hitColor = Color.grey;
         currentRotateSpeed = maxRotateSpeed;
+        Instantiate(healthBar, gameObject.transform);
+    }
+
+    public float getOffsetHeight() {
+        return Math.Min(GetComponent<SpriteRenderer>().bounds.size.x, GetComponent<SpriteRenderer>().bounds.size.y) * 0.6f;
     }
 
     //ChooseRandomMethod()

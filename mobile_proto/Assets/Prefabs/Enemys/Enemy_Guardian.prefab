@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 9031349334242332903}
   bulletprefab: {fileID: 6254213511961255817, guid: e88e32715f5103a44a62d1d5e09ac825, type: 3}
-  rateOfFire: 0.5
+  rateOfFire: 1
 --- !u!114 &1258648215027523304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   startingHealth: 5
   spawnCalcValue: 81
   spriteRenderer: {fileID: 3760398936790650058}
+  healthBar: {fileID: 906911370755983483, guid: 181d5ab20993540468461140f5bd518e, type: 3}
 --- !u!114 &4528279818305290209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 9021176590286347388}
   bulletprefab: {fileID: 6254213511961255817, guid: e88e32715f5103a44a62d1d5e09ac825, type: 3}
-  rateOfFire: 0.5
+  rateOfFire: 1
 --- !u!1 &5463496360912472683
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,9 +382,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 725932032806672046, guid: 181d5ab20993540468461140f5bd518e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 906911370755983483, guid: 181d5ab20993540468461140f5bd518e, type: 3}
       propertyPath: m_Name
       value: EnemyHealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519739274733375841, guid: 181d5ab20993540468461140f5bd518e, type: 3}
+      propertyPath: offset
+      value: 1.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 181d5ab20993540468461140f5bd518e, type: 3}

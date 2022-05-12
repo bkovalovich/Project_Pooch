@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  lifetime: 1
+  lifetime: 0.8
   rigid: {fileID: 1358817304580090104}
 --- !u!70 &4429808550129487211
 CapsuleCollider2D:
@@ -168,7 +168,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.003, y: 0}
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 2, y: 2.5}
   m_Direction: 0
 --- !u!210 &2316084002427782014
 SortingGroup:
