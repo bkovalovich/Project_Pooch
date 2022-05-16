@@ -38,6 +38,8 @@ public class SecondaryWeapon : MonoBehaviour {
         }
     }
 
+    //KeyboardShooting()
+    //For testing and PC port
     public void KeyboardShooting() {
         if (Input.GetKey("o")) {
             ChargedPressed();

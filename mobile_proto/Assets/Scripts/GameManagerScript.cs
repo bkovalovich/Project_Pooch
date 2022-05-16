@@ -24,6 +24,7 @@ public class GameManagerScript : MonoBehaviour {
     [SerializeField] private GameObject enemyGuardianPrefab;
     [SerializeField] private GameObject enemyBarragePrefab;
     [SerializeField] private GameObject enemyInfantryIIPrefab;
+    [SerializeField] private GameObject enemyInfantryIIIPrefab;
     [SerializeField] private GameObject enemyPassengerPrefab;
     private GameObject[] enemyPrefabs;
 
@@ -44,9 +45,9 @@ public class GameManagerScript : MonoBehaviour {
     //Creates enemies at random positions
     public void Start() {
         levelText.text = levelText.text + level;
-        enemyPrefabs = new GameObject[] { enemyInfantryPrefab, enemyExplorerPrefab, enemyGuardianPrefab, enemyInfantryIIPrefab, enemyBarragePrefab, enemyPassengerPrefab };
+        enemyPrefabs = new GameObject[] { enemyInfantryPrefab, enemyExplorerPrefab, enemyGuardianPrefab, enemyInfantryIIPrefab, enemyBarragePrefab, enemyPassengerPrefab, enemyInfantryIIIPrefab };
         spawnCalcMax = GenerateSpawnCalcMax();
-        CreateLevelsEnemies();
+        CreateLevelsEnemies(1 );
 
     }
 
@@ -78,7 +79,7 @@ public class GameManagerScript : MonoBehaviour {
     //CreateLevelEnemies()
     //FOR TESTING
     public void CreateLevelsEnemies(int i) {
-        Instantiate(enemyPassengerPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        Instantiate(enemyInfantryIIIPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
         amountOfEnemies++;
 
     }
