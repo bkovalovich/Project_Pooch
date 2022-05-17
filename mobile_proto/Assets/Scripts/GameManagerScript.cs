@@ -47,7 +47,7 @@ public class GameManagerScript : MonoBehaviour {
         levelText.text = levelText.text + level;
         enemyPrefabs = new GameObject[] { enemyInfantryPrefab, enemyExplorerPrefab, enemyGuardianPrefab, enemyInfantryIIPrefab, enemyBarragePrefab, enemyPassengerPrefab, enemyInfantryIIIPrefab };
         spawnCalcMax = GenerateSpawnCalcMax();
-        CreateLevelsEnemies(1 );
+        CreateLevelsEnemies();
 
     }
 

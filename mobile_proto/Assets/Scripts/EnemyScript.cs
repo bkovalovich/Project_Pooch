@@ -70,7 +70,7 @@ public class EnemyScript : MonoBehaviour {
     }
 
     public float getOffsetHeight() {
-        return Math.Min(GetComponent<SpriteRenderer>().bounds.size.x, GetComponent<SpriteRenderer>().bounds.size.y) * 0.6f;
+        return Math.Min(GetComponent<SpriteRenderer>().bounds.size.x, GetComponent<SpriteRenderer>().bounds.size.y) * .65f;
     }
 
     //ChooseRandomMethod()

@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 public class NextLevelPortalScript : MonoBehaviour
 {
 
-    public float activationTime;
+    [SerializeField] private float activationTime;
+    [SerializeField] private GameObject GetReadyTextPrefab;
+
 
     IEnumerator StartNewLevel() {
+        Instantiate(GetReadyTextPrefab);
         yield return new WaitForSeconds(activationTime);
         EnemyScript.destroyedEnemies = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

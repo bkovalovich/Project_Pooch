@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6641045262634481752}
   - component: {fileID: 2296029347296515400}
   - component: {fileID: 4722840281800191744}
+  - component: {fileID: 788272621321802063}
   m_Layer: 0
   m_Name: NextLevelPortal
   m_TagString: Untagged
@@ -135,7 +136,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48e71669b6e5c74e83669ed87036681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activationTime: 1
+  activationTime: 1.5
+  GetReadyTextPrefab: {fileID: 8365523850902925459, guid: e50074e50a029d345a442fa868f079fd, type: 3}
+--- !u!95 &788272621321802063
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711387511938367422}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8a472c4a65f04f943970fa5e216c9e3d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4263170085944142710
 GameObject:
   m_ObjectHideFlags: 0

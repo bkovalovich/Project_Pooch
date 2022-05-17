@@ -644,8 +644,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0028152, y: -0.00061035}
-  m_SizeDelta: {x: 116, y: 113}
+  m_AnchoredPosition: {x: -0.00039661, y: -0.00010295}
+  m_SizeDelta: {x: 114, y: 114}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &539202927
 MonoBehaviour:
@@ -1364,6 +1364,7 @@ MonoBehaviour:
   enemyGuardianPrefab: {fileID: 1687062525037197746, guid: 6d13b3b87d536db45be2f6416e67e8c8, type: 3}
   enemyBarragePrefab: {fileID: 4872039524075623738, guid: 6a2a2f655701fb14b8d0c75b49ca7cb0, type: 3}
   enemyInfantryIIPrefab: {fileID: 8789762780785729619, guid: ac7cb54dec3ff56428648d7e57079996, type: 3}
+  enemyInfantryIIIPrefab: {fileID: 2450765120126168029, guid: 7f3a4741fcf43664f80d9431eba4a74f, type: 3}
   enemyPassengerPrefab: {fileID: 360454952028546805, guid: 2935ce54dadd6934aad7d71632a72645, type: 3}
   portalPrefab: {fileID: 2711387511938367422, guid: cd223fac273e1c94191f0ae6048afbe0, type: 3}
   levelFinishTextPrefab: {fileID: 3442473890130739558, guid: 5eb6c46a1b4f4cd4abd3cd57ea93d17d, type: 3}

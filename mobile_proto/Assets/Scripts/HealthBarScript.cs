@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class HealthBarScript : MonoBehaviour
 { 
     [SerializeField] public Image meter; //meter image
-    [SerializeField] public float offset;
     private EnemyScript enemyScript;
 
     void Awake() {
