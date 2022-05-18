@@ -11,27 +11,23 @@ public class ShieldScript : MonoBehaviour
     public float maxFill = 1;
     public float currentFill = 1;
     public float shieldDamageWhenHitByBullet = 0.15f;
-    private Rigidbody2D rigid;
     [SerializeField] private AudioSource bulletHitSFX;
-    public static bool shieldIsUp;
-
-
+   
 
     //OnTriggerEnter2D()
     //Removes health if hit with a bullet
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "EnemyBullet") {
+        if (collision.gameObject.CompareTag("EnemyBullet")) {
             bulletHitSFX.Play();
             Destroy(collision.gameObject);
             currentFill -= shieldDamageWhenHitByBullet;
         }
-
     }
+
 
     void Start()
     {
         player = GameObject.Find("Player");
-        rigid = gameObject.GetComponent<Rigidbody2D>();
         rotation = transform.rotation;
     }
 

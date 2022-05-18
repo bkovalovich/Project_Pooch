@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour {
     private float currentInvincibilityTime = 0;//How much invincibility you have left
     public SpriteRenderer spriteRenderer;//For changing texture color
     public Color defaultColor;
-    public ShieldScript shieldScript;
-
     public static float health = 5;//Main health bar
 
     [SerializeField] public float amountOfInvincibleTimeOnHit;//How much invinicbility you get on hit
@@ -20,6 +18,11 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] public float rotateSpeed;//How fast you turn
 
     [SerializeField] private AudioSource enemyBulletHitSFX;
+
+    public bool shieldIsUp;
+
+    //Shield fields
+    private GameObject playerShield;
 
     //PROPERTIES
     public Vector3 PlayerPosition {
@@ -31,11 +34,12 @@ public class PlayerMovement : MonoBehaviour {
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
-        shieldScript = GetComponentInChildren<ShieldScript>();
+        playerShield = gameObject.transform.GetChild(1).gameObject;
+
     }
 
     //DEBUG MOVEMENT
-    void touchTests() {
+    void TouchTests() {
         if (Input.touchCount > 0) {
             touch = Input.GetTouch(0);
             switch (touch.phase) {
@@ -62,31 +66,6 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public void ShieldPressed() {
-        shieldScript.SetActive(true);
-        shieldIsUp = true;
-    }
-
-    public void ShieldNotPressed() {
-        shieldScript.SetActive(false);
-        shieldIsUp = false;
-    }
-
-    void keyboardTurning() {
-        if (Input.GetKey("a")) {
-            transform.Rotate(Vector3.forward * rotateSpeed);
-        }
-        if (Input.GetKey("d")) {
-            transform.Rotate(Vector3.back * rotateSpeed);
-        }
-        if (Input.GetKey("p")) {
-            shieldScript.ShieldPressed();
-        } else {
-            shieldScript.ShieldNotPressed();
-        }
-        transform.position += transform.up * Time.deltaTime * movementSpeed;
-    }
-
     //INTERFACES WITH TOUCHSCREEN BUTTONS
     public void leftPressed() {
         isLeftPressed = true;
@@ -109,6 +88,21 @@ public class PlayerMovement : MonoBehaviour {
         transform.Rotate(Vector3.back * rotateSpeed);
     }
 
+    public void ShieldPressed() {
+        shieldIsUp = true;
+    }
+
+    public void ShieldNotPressed() {
+        shieldIsUp = false;
+    }
+
+    public void turnShieldOn() {
+        playerShield.SetActive(true);
+    }
+    public void turnShieldOff() {
+        playerShield.SetActive(false);
+    }
+
     //FINAL MOVEMENT
     public void touchscreenMovement() {
         if (isLeftPressed) {
@@ -116,6 +110,33 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (isRightPressed) {
             turnRight();
+        }
+        if (shieldIsUp) {
+            turnShieldOn();
+        }
+        else {
+            turnShieldOff();
+        }
+    }
+
+    void keyboardTurning() {
+        if (Input.GetKey("a"))
+        {
+            transform.Rotate(Vector3.forward * rotateSpeed);
+        }
+        if (Input.GetKey("d"))
+        {
+            transform.Rotate(Vector3.back * rotateSpeed);
+        }
+        if (Input.GetKey("p"))
+        {
+            shieldIsUp = true;
+            turnShieldOn();
+        }
+        else
+        {
+            shieldIsUp = false;
+            turnShieldOff();
         }
     }
 
@@ -130,6 +151,7 @@ public class PlayerMovement : MonoBehaviour {
             currentInvincibilityTime = amountOfInvincibleTimeOnHit;
         }
     }
+
     public void loseHealth(float damage) {
         health = health - damage;
     }
@@ -150,7 +172,8 @@ public class PlayerMovement : MonoBehaviour {
             spriteRenderer.color = defaultColor;
             
         }
-        keyboardTurning();
+        transform.position += transform.up * Time.deltaTime * movementSpeed;
+       // keyboardTurning();
         touchscreenMovement();
     }
 }

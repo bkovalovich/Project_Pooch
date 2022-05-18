@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PlayerWeapon : Weapon
 {
+    public PlayerMovement playerScript;
 
-    // Update is called once per frame
-    new private void FixedUpdate()
-    {
+     void Start() {
+        playerScript = gameObject.GetComponent<PlayerMovement>();
+    }
+
+    new private void FixedUpdate(){
         currentRechargeTime += Time.deltaTime;
         if (currentRechargeTime >= rateOfFire) {
             currentRechargeTime = currentRechargeTime % rateOfFire;
-            if (!ShieldScript.shieldIsUp) {
+            if (!playerScript.shieldIsUp) {
+                Debug.Log(playerScript.shieldIsUp);
                 Shoot(new Vector3(0, 0, 0));
             }
         }
