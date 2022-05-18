@@ -15,6 +15,7 @@ public class EnemyPassengerScript : EnemyScript
     private GameManagerScript gameManagerScript;
     private float currentRechargeTime = 0f;//Determines current time between weapon uses
 
+
     new protected void Start() {
         base.Start();
         gameManager = GameObject.Find("GameManager");

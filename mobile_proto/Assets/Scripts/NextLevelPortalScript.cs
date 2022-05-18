@@ -8,7 +8,9 @@ public class NextLevelPortalScript : MonoBehaviour
 
     [SerializeField] private float activationTime;
     [SerializeField] private GameObject GetReadyTextPrefab;
-
+    
+    [SerializeField] private AudioSource portalAppearSFX;
+    [SerializeField] private AudioSource portalEnterSFX;
 
     IEnumerator StartNewLevel() {
         Instantiate(GetReadyTextPrefab);
@@ -19,6 +21,8 @@ public class NextLevelPortalScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Player") {
+            portalAppearSFX.Stop();
+            portalEnterSFX.Play();
             StartCoroutine(StartNewLevel());
         }
     }

@@ -49,6 +49,9 @@ public class EnemyScript : MonoBehaviour {
     //Health Bar fields
     [SerializeField] protected GameObject healthBar;
 
+    //SFX fields
+    [SerializeField] private AudioSource onHitSFX;
+
     //PROPERTIES
     public float HealthRatio {
         get { return currentHealth / startingHealth; }
@@ -197,6 +200,7 @@ public class EnemyScript : MonoBehaviour {
             //    currentHealth = 0;
             //    break;
             case "Bullet": //Hit by player bullet
+                onHitSFX.Play();
                 currentPauseTime = amountOfPauseTimeOnHit; 
                 currentHealth = currentHealth - normalBulletDamage;
                 Destroy(collision.gameObject);

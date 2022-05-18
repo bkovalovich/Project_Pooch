@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] public float movementSpeed;//How fast you move forward
     [SerializeField] public float rotateSpeed;//How fast you turn
 
+    [SerializeField] private AudioSource enemyBulletHitSFX;
+
     //PROPERTIES
     public Vector3 PlayerPosition {
         get { return transform.position; }
@@ -60,6 +62,16 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    public void ShieldPressed() {
+        shieldScript.SetActive(true);
+        shieldIsUp = true;
+    }
+
+    public void ShieldNotPressed() {
+        shieldScript.SetActive(false);
+        shieldIsUp = false;
+    }
+
     void keyboardTurning() {
         if (Input.GetKey("a")) {
             transform.Rotate(Vector3.forward * rotateSpeed);
@@ -99,9 +111,6 @@ public class PlayerMovement : MonoBehaviour {
 
     //FINAL MOVEMENT
     public void touchscreenMovement() {
-        if (health > 0) {
-            transform.position += transform.up * Time.deltaTime * movementSpeed;
-        }
         if (isLeftPressed) {
             turnLeft();
         }
@@ -116,6 +125,7 @@ public class PlayerMovement : MonoBehaviour {
             health = 0;
         }
         if (currentInvincibilityTime <= 0 && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")) {
+            enemyBulletHitSFX.Play();
             loseHealth(1f);
             currentInvincibilityTime = amountOfInvincibleTimeOnHit;
         }
@@ -141,6 +151,6 @@ public class PlayerMovement : MonoBehaviour {
             
         }
         keyboardTurning();
-        //touchscreenMovement();
+        touchscreenMovement();
     }
 }

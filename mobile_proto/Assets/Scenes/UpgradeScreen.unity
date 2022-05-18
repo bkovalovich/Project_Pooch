@@ -527,7 +527,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1027550057}
-  - component: {fileID: 1027550056}
   - component: {fileID: 1027550055}
   m_Layer: 0
   m_Name: BackgroundMusic
@@ -632,14 +631,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!81 &1027550056
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027550054}
-  m_Enabled: 1
 --- !u!4 &1027550057
 Transform:
   m_ObjectHideFlags: 0

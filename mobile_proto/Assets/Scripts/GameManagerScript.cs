@@ -31,6 +31,10 @@ public class GameManagerScript : MonoBehaviour {
     [SerializeField] private GameObject portalPrefab;
     [SerializeField] private GameObject levelFinishTextPrefab;
 
+    //MUSIC
+    [SerializeField] private AudioSource backgroundMusic;
+    public static float currentTimestamp;
+
     //MISC
     [SerializeField] private Text levelText;
     [SerializeField] private Text playerHealthText;
@@ -43,7 +47,8 @@ public class GameManagerScript : MonoBehaviour {
 
     //Start()
     //Creates enemies at random positions
-    public void Start() {
+    public void Start() {  
+        backgroundMusic.time = currentTimestamp;
         levelText.text = levelText.text + level;
         enemyPrefabs = new GameObject[] { enemyInfantryPrefab, enemyExplorerPrefab, enemyGuardianPrefab, enemyInfantryIIPrefab, enemyBarragePrefab, enemyPassengerPrefab, enemyInfantryIIIPrefab };
         spawnCalcMax = GenerateSpawnCalcMax();
@@ -79,7 +84,7 @@ public class GameManagerScript : MonoBehaviour {
     //CreateLevelEnemies()
     //FOR TESTING
     public void CreateLevelsEnemies(int i) {
-        Instantiate(enemyInfantryIIIPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
+        Instantiate(enemyBarragePrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
         amountOfEnemies++;
 
     }
@@ -103,6 +108,7 @@ public class GameManagerScript : MonoBehaviour {
     //FixedUpdate()
     //Starts next round if all enemies were destroyed
     public void FixedUpdate() {
+        currentTimestamp = backgroundMusic.time;
         Time.timeScale = modifiedGameSpeed;
         playerHealthText.text = "Health: " + PlayerMovement.health.ToString();
         int enemiesLeft = amountOfEnemies - EnemyScript.destroyedEnemies;

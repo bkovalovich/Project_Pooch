@@ -9,6 +9,7 @@ public class SecondaryWeapon : MonoBehaviour {
     private bool isCoolingDown = false;//Whether you can shoot at the moment
     private float currentRechargeTime = 0f;//Determines current time between weapon uses
     [SerializeField] public float maxRechargeTime;//Amount of time between shots
+    [SerializeField] private AudioSource chargeShotSFX;
 
     //IsCoolingDown
     //Returns isCoolingDown
@@ -32,6 +33,7 @@ public class SecondaryWeapon : MonoBehaviour {
     //Calls Shoot() and starts the cooldown period so it can't be called for the length of field maxRechargeTime
     public void ChargedPressed() {
         if (isCoolingDown == false) {
+            chargeShotSFX.Play();
             Shoot(new Vector3(0, 0, 0));
             currentRechargeTime = maxRechargeTime;
             isCoolingDown = true;
