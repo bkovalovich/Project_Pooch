@@ -15,7 +15,6 @@ public class PlayerWeapon : Weapon
         if (currentRechargeTime >= rateOfFire) {
             currentRechargeTime = currentRechargeTime % rateOfFire;
             if (!playerScript.shieldIsUp) {
-                Debug.Log(playerScript.shieldIsUp);
                 Shoot(new Vector3(0, 0, 0));
             }
         }

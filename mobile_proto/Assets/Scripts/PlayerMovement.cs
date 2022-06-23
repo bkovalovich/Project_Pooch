@@ -173,7 +173,7 @@ public class PlayerMovement : MonoBehaviour {
             
         }
         transform.position += transform.up * Time.deltaTime * movementSpeed;
-       // keyboardTurning();
-        touchscreenMovement();
+        keyboardTurning();
+        //touchscreenMovement();
     }
 }
