@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWeapon : Weapon
 {
-    public PlayerMovement playerScript;
+    private PlayerMovement playerScript;
 
      void Start() {
         playerScript = gameObject.GetComponent<PlayerMovement>();

@@ -479,7 +479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 102, y: -35}
+  m_AnchoredPosition: {x: 102, y: 36.000015}
   m_SizeDelta: {x: 116.082, y: 113.4973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &227853621
@@ -860,13 +860,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLeftPressed: 0
   isRightPressed: 0
+  shieldIsUp: 0
+  isDashPressed: 0
   spriteRenderer: {fileID: 799483586}
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
   amountOfInvincibleTimeOnHit: 2
-  movementSpeed: 9
+  movementSpeed: 8.5
+  dashSpeed: 25
   rotateSpeed: 4.5
   enemyBulletHitSFX: {fileID: 799483594}
-  shieldIsUp: 0
 --- !u!212 &799483586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -984,7 +986,6 @@ MonoBehaviour:
   bulletprefab: {fileID: 8378655219875027530, guid: c20093d7c261c5144addaa5e2d3ebb16, type: 3}
   rateOfFire: 0.14
   fireSFX: {fileID: 799483596}
-  playerScript: {fileID: 0}
 --- !u!58 &799483591
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1017,7 +1018,6 @@ MonoBehaviour:
   bulletprefab: {fileID: 8378655219875027530, guid: c20093d7c261c5144addaa5e2d3ebb16, type: 3}
   rateOfFire: 0.14
   fireSFX: {fileID: 799483596}
-  playerScript: {fileID: 0}
 --- !u!114 &799483593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1640,11 +1640,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: {x: 0, y: 0, z: 0, w: 0}
   player: {fileID: 799483584}
-  isCoolingDown: 0
-  maxFill: 1
-  currentFill: 1
-  shieldDamageWhenHitByBullet: 0.15
   bulletHitSFX: {fileID: 1009343114}
+  maxShieldHealth: 10
+  shieldHealthRatio: 0
+  maxRechargeTime: 0
+  shieldRechargePerFrame: 0.001
+  rfloat: 0
+  gfloat: 0
+  bfloat: 0
+  afloat: 0
 --- !u!82 &1009343114
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2369,7 +2373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 36, y: -33}
+  m_AnchoredPosition: {x: 36, y: 38}
   m_SizeDelta: {x: 115.6195, y: 113.4973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1626693040

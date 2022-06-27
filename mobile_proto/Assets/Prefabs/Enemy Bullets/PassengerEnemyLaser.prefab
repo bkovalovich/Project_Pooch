@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: lifetime
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5037796132495897165, guid: a74b5cfb0fea92c4e91920b2e7dd9f31, type: 3}
+      propertyPath: bulletSpeed
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2749025308484216324, guid: a74b5cfb0fea92c4e91920b2e7dd9f31, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a74b5cfb0fea92c4e91920b2e7dd9f31, type: 3}

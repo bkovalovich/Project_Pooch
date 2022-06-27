@@ -8,21 +8,26 @@ public class PlayerMovement : MonoBehaviour {
                        //touch tests
     public bool isLeftPressed;//Main variables for left and right movement with touchscreen
     public bool isRightPressed;
+    public bool shieldIsUp;
+    public bool isDashPressed;
     private float currentInvincibilityTime = 0;//How much invincibility you have left
     public SpriteRenderer spriteRenderer;//For changing texture color
     public Color defaultColor;
     public static float health = 5;//Main health bar
 
     [SerializeField] public float amountOfInvincibleTimeOnHit;//How much invinicbility you get on hit
-    [SerializeField] public float movementSpeed;//How fast you move forward
+
+    [SerializeField] public float movementSpeed;
+    [SerializeField] public float dashSpeed;
+
+    private float currentSpeed;//How fast you move forward
     [SerializeField] public float rotateSpeed;//How fast you turn
-
     [SerializeField] private AudioSource enemyBulletHitSFX;
-
-    public bool shieldIsUp;
 
     //Shield fields
     private GameObject playerShield;
+    private Collider2D playerShieldCollider;
+    private SpriteRenderer playerShieldSpriteRenderer;
 
     //PROPERTIES
     public Vector3 PlayerPosition {
@@ -35,6 +40,8 @@ public class PlayerMovement : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
         playerShield = gameObject.transform.GetChild(1).gameObject;
+        playerShieldCollider = playerShield.GetComponent<Collider2D>();
+        playerShieldSpriteRenderer = playerShield.GetComponent<SpriteRenderer>();
 
     }
 
@@ -91,16 +98,25 @@ public class PlayerMovement : MonoBehaviour {
     public void ShieldPressed() {
         shieldIsUp = true;
     }
-
     public void ShieldNotPressed() {
         shieldIsUp = false;
     }
 
+    public void DashPressed() {
+        isDashPressed = true;
+    }
+    public void DashNotPressed() {
+        isDashPressed = false;
+    }
+
     public void turnShieldOn() {
-        playerShield.SetActive(true);
+            playerShieldCollider.enabled = true;
+            playerShieldSpriteRenderer.enabled = true;
+        
     }
     public void turnShieldOff() {
-        playerShield.SetActive(false);
+        playerShieldCollider.enabled = false;
+        playerShieldSpriteRenderer.enabled = false;
     }
 
     //FINAL MOVEMENT
@@ -111,30 +127,33 @@ public class PlayerMovement : MonoBehaviour {
         if (isRightPressed) {
             turnRight();
         }
-        if (shieldIsUp) {
-            turnShieldOn();
-        }
-        else {
-            turnShieldOff();
-        }
     }
 
     void keyboardTurning() {
-        if (Input.GetKey("a"))
+        if (Input.GetKey("i"))
         {
-            transform.Rotate(Vector3.forward * rotateSpeed);
-        }
-        if (Input.GetKey("d"))
-        {
-            transform.Rotate(Vector3.back * rotateSpeed);
-        }
-        if (Input.GetKey("p"))
-        {
-            shieldIsUp = true;
-            turnShieldOn();
+            DashPressed();
+            currentSpeed = dashSpeed;
         }
         else
         {
+            DashNotPressed();
+            currentSpeed = movementSpeed;
+            if (Input.GetKey("a"))
+            {
+                transform.Rotate(Vector3.forward * rotateSpeed);
+            }
+            if (Input.GetKey("d"))
+            {
+                transform.Rotate(Vector3.back * rotateSpeed);
+            }
+        }
+        
+        if (Input.GetKey("p") && !ShieldScript.shieldIsBroken) {
+            shieldIsUp = true;
+            turnShieldOn();
+        }
+        else {
             shieldIsUp = false;
             turnShieldOff();
         }
@@ -172,8 +191,9 @@ public class PlayerMovement : MonoBehaviour {
             spriteRenderer.color = defaultColor;
             
         }
-        transform.position += transform.up * Time.deltaTime * movementSpeed;
         keyboardTurning();
-        //touchscreenMovement();
+      //  touchscreenMovement();
+        transform.position += transform.up * Time.deltaTime * currentSpeed;
+
     }
 }

@@ -151,7 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b97a13f2cb0e942aae54bb78a2b806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  bulletSpeed: 20
+  bulletSpeedWhenDashing: 40
   lifetime: 0.8
   rigid: {fileID: 1358817304580090104}
 --- !u!70 &4429808550129487211
