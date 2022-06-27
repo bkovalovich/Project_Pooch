@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour {
     public Touch touch;//For
                        //touch tests
-    public bool isLeftPressed;//Main variables for left and right movement with touchscreen
-    public bool isRightPressed;
-    public bool shieldIsUp;
-    public bool isDashPressed;
+    public bool isLeftPressed = false;//Main variables for left and right movement with touchscreen
+    public bool isRightPressed = false;
+    public bool shieldIsUp = false;
+    public bool isDashPressed = false;
     private float currentInvincibilityTime = 0;//How much invincibility you have left
     public SpriteRenderer spriteRenderer;//For changing texture color
     public Color defaultColor;
@@ -121,23 +121,32 @@ public class PlayerMovement : MonoBehaviour {
 
     //FINAL MOVEMENT
     public void touchscreenMovement() {
-        if (isLeftPressed) {
-            turnLeft();
+        if (isDashPressed) {
+            currentSpeed = dashSpeed;
+        } else {
+            currentSpeed = movementSpeed;
+            if (isLeftPressed) {
+                turnLeft();
+            }
+            if (isRightPressed) {
+                turnRight();
+            }
         }
-        if (isRightPressed) {
-            turnRight();
+      
+        if (shieldIsUp && !ShieldScript.shieldIsBroken) {
+            turnShieldOn();
+        } else {
+            turnShieldOff();
         }
     }
 
     void keyboardTurning() {
         if (Input.GetKey("i"))
         {
-            DashPressed();
             currentSpeed = dashSpeed;
         }
         else
         {
-            DashNotPressed();
             currentSpeed = movementSpeed;
             if (Input.GetKey("a"))
             {
@@ -150,11 +159,9 @@ public class PlayerMovement : MonoBehaviour {
         }
         
         if (Input.GetKey("p") && !ShieldScript.shieldIsBroken) {
-            shieldIsUp = true;
             turnShieldOn();
         }
         else {
-            shieldIsUp = false;
             turnShieldOff();
         }
     }
@@ -191,8 +198,8 @@ public class PlayerMovement : MonoBehaviour {
             spriteRenderer.color = defaultColor;
             
         }
-        keyboardTurning();
-      //  touchscreenMovement();
+        //keyboardTurning();
+        touchscreenMovement();
         transform.position += transform.up * Time.deltaTime * currentSpeed;
 
     }
