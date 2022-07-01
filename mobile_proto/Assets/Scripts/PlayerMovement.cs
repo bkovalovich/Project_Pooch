@@ -86,22 +86,12 @@ public class PlayerMovement : MonoBehaviour {
     public void rightNotPressed() {
         isRightPressed = false;
     }
-
-    //VERTICAL MOVEMENT
-    public void turnLeft() {
-        transform.Rotate(Vector3.forward * rotateSpeed);
-    }
-    public void turnRight() {
-        transform.Rotate(Vector3.back * rotateSpeed);
-    }
-
     public void ShieldPressed() {
         shieldIsUp = true;
     }
     public void ShieldNotPressed() {
         shieldIsUp = false;
     }
-
     public void DashPressed() {
         isDashPressed = true;
     }
@@ -110,13 +100,20 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void turnShieldOn() {
-            playerShieldCollider.enabled = true;
-            playerShieldSpriteRenderer.enabled = true;
-        
+        playerShieldCollider.enabled = true;
+        playerShieldSpriteRenderer.enabled = true;
     }
     public void turnShieldOff() {
         playerShieldCollider.enabled = false;
         playerShieldSpriteRenderer.enabled = false;
+    }
+
+    //VERTICAL MOVEMENT
+    public void turnLeft() {
+        transform.Rotate(Vector3.forward * rotateSpeed);
+    }
+    public void turnRight() {
+        transform.Rotate(Vector3.back * rotateSpeed);
     }
 
     //FINAL MOVEMENT
@@ -143,18 +140,25 @@ public class PlayerMovement : MonoBehaviour {
     void keyboardTurning() {
         if (Input.GetKey("i"))
         {
+            DashPressed();
             currentSpeed = dashSpeed;
         }
         else
         {
+            DashNotPressed();
             currentSpeed = movementSpeed;
             if (Input.GetKey("a"))
             {
-                transform.Rotate(Vector3.forward * rotateSpeed);
+                leftPressed();
+                turnLeft();
+            } else {
+                leftNotPressed();
             }
-            if (Input.GetKey("d"))
-            {
-                transform.Rotate(Vector3.back * rotateSpeed);
+            if (Input.GetKey("d")) {
+                rightPressed();
+                turnRight();
+            } else {
+                rightNotPressed();
             }
         }
         
@@ -198,7 +202,7 @@ public class PlayerMovement : MonoBehaviour {
             spriteRenderer.color = defaultColor;
             
         }
-        //keyboardTurning();
+        keyboardTurning();
         touchscreenMovement();
         transform.position += transform.up * Time.deltaTime * currentSpeed;
 
