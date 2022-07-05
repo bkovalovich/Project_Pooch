@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 
     [SerializeField] public float movementSpeed;
     [SerializeField] public float dashSpeed;
+    [SerializeField] public bool onMobile;
 
     private float currentSpeed;//How fast you move forward
     [SerializeField] public float rotateSpeed;//How fast you turn
@@ -202,8 +203,11 @@ public class PlayerMovement : MonoBehaviour {
             spriteRenderer.color = defaultColor;
             
         }
-        keyboardTurning();
-        touchscreenMovement();
+        if (onMobile) {
+            touchscreenMovement();
+        } else {
+            keyboardTurning();
+        }
         transform.position += transform.up * Time.deltaTime * currentSpeed;
 
     }
