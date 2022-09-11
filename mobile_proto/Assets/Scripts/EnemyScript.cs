@@ -52,6 +52,9 @@ public class EnemyScript : MonoBehaviour {
     //SFX fields
     [SerializeField] private AudioSource onHitSFX;
 
+    //Level end fields
+    public static bool levelIsEnded = false;
+
     //PROPERTIES
     public float HealthRatio {
         get { return currentHealth / startingHealth; }
@@ -264,6 +267,8 @@ public class EnemyScript : MonoBehaviour {
             destroyedEnemies++;
             Destroy(gameObject);
         }
-    }
+    } 
+
+
 
 }

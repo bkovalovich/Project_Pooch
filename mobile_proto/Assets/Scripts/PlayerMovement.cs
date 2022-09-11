@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
                        //touch tests
     public bool isLeftPressed = false;//Main variables for left and right movement with touchscreen
     public bool isRightPressed = false;
-    public bool shieldIsUp = false;
+    public static bool shieldIsUp = false;
     public bool isDashPressed = false;
     private float currentInvincibilityTime = 0;//How much invincibility you have left
     public SpriteRenderer spriteRenderer;//For changing texture color
@@ -29,6 +29,11 @@ public class PlayerMovement : MonoBehaviour {
     private GameObject playerShield;
     private Collider2D playerShieldCollider;
     private SpriteRenderer playerShieldSpriteRenderer;
+
+    //Level ending fields
+    public static bool startMovingTowardsPortal = false;
+    private float shrinkScale = 0.0008f;
+    private float moveTowardsPortalSpeed = 0.1f;
 
     //PROPERTIES
     public Vector3 PlayerPosition {
@@ -164,9 +169,11 @@ public class PlayerMovement : MonoBehaviour {
         }
         
         if (Input.GetKey("p") && !ShieldScript.shieldIsBroken) {
+            shieldIsUp = true;
             turnShieldOn();
         }
         else {
+            shieldIsUp = false;
             turnShieldOff();
         }
     }
@@ -191,24 +198,31 @@ public class PlayerMovement : MonoBehaviour {
         return currentInvincibilityTime >= 0f;
     }
 
+    private void moveTowardsPortal() {
+        transform.localScale -= new Vector3(shrinkScale, shrinkScale, shrinkScale);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), moveTowardsPortalSpeed); 
+    }
     void FixedUpdate()
-    {  
-        if (health <= 0) {
-            SceneManager.LoadScene("GameOver");
-        }
-            if(isInvincible()) {
+    {
+        if (startMovingTowardsPortal == true) {
+            moveTowardsPortal();
+        } else {
+            if (health <= 0) {
+                SceneManager.LoadScene("GameOver");
+            }
+            if (isInvincible()) {
                 currentInvincibilityTime -= Time.deltaTime;
                 spriteRenderer.color = Color.red;
             } else {
-            spriteRenderer.color = defaultColor;
-            
-        }
-        if (onMobile) {
-            touchscreenMovement();
-        } else {
-            keyboardTurning();
-        }
-        transform.position += transform.up * Time.deltaTime * currentSpeed;
+                spriteRenderer.color = defaultColor;
 
+            }
+            if (onMobile) {
+                touchscreenMovement();
+            } else {
+                keyboardTurning();
+            }
+            transform.position += transform.up * Time.deltaTime * currentSpeed;
+        }
     }
 }

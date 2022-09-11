@@ -58,7 +58,7 @@ public class ShieldScript : MonoBehaviour {
         transform.position = player.GetComponent<PlayerMovement>().PlayerPosition; //Stay with player
         transform.rotation = rotation;
 
-        Debug.Log(currentShieldHealth);
+       // Debug.Log(currentShieldHealth);
         shieldHealthRatio = (currentShieldHealth / maxShieldHealth);
         shieldSprite.material.color = new Color(1, shieldHealthRatio, shieldHealthRatio, 1);
         //            sprite.color = new Color (1, 0, 0, 1); 

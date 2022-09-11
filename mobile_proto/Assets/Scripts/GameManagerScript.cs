@@ -84,12 +84,7 @@ public class GameManagerScript : MonoBehaviour {
     //CreateLevelEnemies()
     //FOR TESTING
     public void CreateLevelsEnemies(int f) {
-        for (int i = 0; i < 100; i++) {
-            Instantiate(enemyExplorerPrefab, RandomMapPosition(), new Quaternion(0, 0, 0, 0));
 
-        }
-
-        amountOfEnemies = amountOfEnemies + 30;
 
     }
 

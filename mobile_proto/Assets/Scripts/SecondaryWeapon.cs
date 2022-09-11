@@ -40,7 +40,7 @@ public class SecondaryWeapon : MonoBehaviour {
     //ChargedPressed()
     //Calls Shoot() and starts the cooldown period so it can't be called for the length of field maxRechargeTime
     public void ChargedPressed() {
-        if (isCoolingDown == false && !playerScript.shieldIsUp) {
+        if (isCoolingDown == false && !PlayerMovement.shieldIsUp) {
             chargeShotSFX.Play();
             Shoot(new Vector3(0, 0, 0));
             currentRechargeTime = maxRechargeTime;
