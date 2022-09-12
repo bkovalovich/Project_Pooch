@@ -137,6 +137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48e71669b6e5c74e83669ed87036681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Maps:
+  - {fileID: 5761885728346347044, guid: d5c6ba2c6a7ff02409ce8c507647a95f, type: 3}
+  - {fileID: 3569467547428431931, guid: 6e2fcb46569ecdb4dbb91fcbfb121bf1, type: 3}
+  - {fileID: 3216949558739837471, guid: 87e878ad1417a9f44bdb19287a50c641, type: 3}
+  mapVal: 0
   activationTime: 1.5
   GetReadyTextPrefab: {fileID: 8365523850902925459, guid: e50074e50a029d345a442fa868f079fd, type: 3}
   portalAppearSFX: {fileID: 2317074435537095319}

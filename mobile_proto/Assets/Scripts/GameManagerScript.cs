@@ -10,6 +10,11 @@ public class GameManagerScript : MonoBehaviour {
     private float modifiedGameSpeed = 1; //Sets the game speed
     private bool levelBeaten = false;//Is set to true if the level has been beaten
 
+    //MAP DATA
+    [SerializeField] private GameObject[] Maps;
+    private GameObject currentMap;
+    [SerializeField] private int mapVal;
+
     //ENEMY SPAWNING
     public static int spawnCalcMax = 100;
     public int amountOfEnemies; //Number of enemies per round
@@ -47,7 +52,12 @@ public class GameManagerScript : MonoBehaviour {
 
     //Start()
     //Creates enemies at random positions
-    public void Start() {  
+    public void Start() {
+        //LOADS A RANDOM MAP FROM THE INDEX -Ethan
+        mapVal = Random.Range(0, Maps.Length);
+        currentMap = Instantiate(Maps[mapVal]);
+        Debug.Log(mapVal);
+
         backgroundMusic.time = currentTimestamp;
         levelText.text = levelText.text + level;
         enemyPrefabs = new GameObject[] { enemyInfantryPrefab, enemyExplorerPrefab, enemyGuardianPrefab, enemyInfantryIIPrefab, enemyBarragePrefab, enemyPassengerPrefab, enemyInfantryIIIPrefab };

@@ -10,7 +10,6 @@ enum PortalState {
 }
 public class NextLevelPortalScript : MonoBehaviour
 {
-
     [SerializeField] private float activationTime;
     [SerializeField] private GameObject GetReadyTextPrefab;
     
