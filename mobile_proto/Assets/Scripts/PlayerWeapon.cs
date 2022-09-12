@@ -6,7 +6,6 @@ public class PlayerWeapon : Weapon
 {
 
     new private void FixedUpdate(){
-        Debug.Log(PlayerMovement.shieldIsUp);
         currentRechargeTime += Time.deltaTime;
         if (currentRechargeTime >= rateOfFire) {
             currentRechargeTime = currentRechargeTime % rateOfFire;

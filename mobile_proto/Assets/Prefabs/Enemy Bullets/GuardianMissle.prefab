@@ -119,6 +119,7 @@ MonoBehaviour:
   lifetime: 8
   rigid: {fileID: 6365429198785604084}
   player: {fileID: 0}
+  explosionEffect: {fileID: 3203844307256236983, guid: 090090a101e20ce41b8dfb364c53a866, type: 3}
 --- !u!50 &6365429198785604084
 Rigidbody2D:
   serializedVersion: 4

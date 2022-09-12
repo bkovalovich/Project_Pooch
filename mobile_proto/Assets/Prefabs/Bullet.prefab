@@ -153,8 +153,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 20
   bulletSpeedWhenDashing: 40
-  lifetime: 0.8
+  lifetime: 1.5
   rigid: {fileID: 1358817304580090104}
+  player: {fileID: 0}
+  explosionEffect: {fileID: 3203844307256236983, guid: 090090a101e20ce41b8dfb364c53a866, type: 3}
 --- !u!70 &4429808550129487211
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

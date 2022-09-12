@@ -178,6 +178,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6994317837877324552}
   healthBar: {fileID: 906911370755983483, guid: 181d5ab20993540468461140f5bd518e, type: 3}
   onHitSFX: {fileID: 2883067798704204794}
+  explosionEffect: {fileID: 4749421413195644720, guid: cf48fed731b357d4f9386194c65d0b2e, type: 3}
 --- !u!114 &6414658954244789661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +220,7 @@ AudioSource:
   m_GameObject: {fileID: 4780280189320289904}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 513f74aa72933d84d90e965a61649ed9, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7925c6aa6da8f104eaad507046fc0cca, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.117
@@ -315,7 +316,7 @@ AudioSource:
   m_GameObject: {fileID: 4780280189320289904}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 513f74aa72933d84d90e965a61649ed9, type: 2}
   m_audioClip: {fileID: 8300000, guid: d5fcf81c640e00744b13b5bef6fed5ac, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.274
@@ -469,7 +470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalRotation.x
@@ -477,11 +478,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -493,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 270
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}

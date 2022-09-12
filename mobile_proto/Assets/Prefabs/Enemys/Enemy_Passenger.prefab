@@ -150,6 +150,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 2758084628038275981}
   healthBar: {fileID: 906911370755983483, guid: 181d5ab20993540468461140f5bd518e, type: 3}
   onHitSFX: {fileID: 251082748155947463}
+  explosionEffect: {fileID: 4749421413195644720, guid: cf48fed731b357d4f9386194c65d0b2e, type: 3}
   LeftTopSpawnPoint: {fileID: 2278792319782412892}
   RightTopSpawnPoint: {fileID: 4980946444958557231}
   LeftBottomSpawnPoint: {fileID: 961415225743164163}
@@ -181,7 +182,7 @@ AudioSource:
   m_GameObject: {fileID: 360454952028546805}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 513f74aa72933d84d90e965a61649ed9, type: 2}
   m_audioClip: {fileID: 8300000, guid: b34fe26b360c3eb41893fd55b086e7dc, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.522
@@ -277,7 +278,7 @@ AudioSource:
   m_GameObject: {fileID: 360454952028546805}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 513f74aa72933d84d90e965a61649ed9, type: 2}
   m_audioClip: {fileID: 8300000, guid: d5fcf81c640e00744b13b5bef6fed5ac, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.274
@@ -531,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 3.7402487
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalScale.y
@@ -543,7 +544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.006
+      value: -0.068
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalPosition.z
@@ -551,7 +552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalRotation.x
@@ -559,11 +560,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -575,7 +576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700110155858564703, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: 7383574255112138265, guid: e1de087d7c6a38a4b988c60bb13de312, type: 3}
       propertyPath: m_Color.b

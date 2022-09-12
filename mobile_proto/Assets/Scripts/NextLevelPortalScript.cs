@@ -50,11 +50,9 @@ public class NextLevelPortalScript : MonoBehaviour
         switch (currentPortalState) {
             case (PortalState.Opening):
                 if (growTimer < timeToGrow) {
-                    Debug.Log($"growing for {growTimer} seconds");
                     growTimer += Time.deltaTime;
                     transform.localScale += new Vector3(growScale, growScale, growScale);
                 } else {
-                    Debug.Log("collider is activated");
                     circleCollider.enabled = true;
                     currentPortalState = PortalState.Idling;
                 }

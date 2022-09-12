@@ -15,6 +15,7 @@ public class EnemyScript : MonoBehaviour {
    
     [SerializeField] protected SpriteRenderer spriteRenderer;//For changing texture color
 
+
     //Determine if dead fields
     public static int destroyedEnemies = 0;
     protected float currentHealth;
@@ -54,6 +55,9 @@ public class EnemyScript : MonoBehaviour {
 
     //Level end fields
     public static bool levelIsEnded = false;
+
+    //explosion field
+    [SerializeField] public GameObject explosionEffect;
 
     //PROPERTIES
     public float HealthRatio {
@@ -267,8 +271,10 @@ public class EnemyScript : MonoBehaviour {
             destroyedEnemies++;
             Destroy(gameObject);
         }
-    } 
+    }
 
-
+    private void OnDestroy() {
+        Instantiate(explosionEffect, transform.position, transform.rotation);
+    }
 
 }

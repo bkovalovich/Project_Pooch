@@ -15,6 +15,7 @@ public class BulletScript : MonoBehaviour
     public GameObject player;
     private GameObject playerScript;
     //gameObject.GetComponent<ScriptName>().variable
+    [SerializeField] public GameObject explosionEffect;
 
 
 
@@ -45,6 +46,10 @@ public class BulletScript : MonoBehaviour
         if (lifetime <= 0f) {
             Destroy(gameObject);    
         }
+    }
+
+    private void OnDestroy() {
+        Instantiate(explosionEffect, transform.position, transform.rotation);
     }
 }
 
