@@ -1520,7 +1520,7 @@ MonoBehaviour:
   amountOfInvincibleTimeOnHit: 2
   movementSpeed: 8.5
   dashSpeed: 25
-  onMobile: 0
+  onMobile: 1
   rotateSpeed: 4.5
   enemyBulletHitSFX: {fileID: 799483594}
 --- !u!212 &799483586
