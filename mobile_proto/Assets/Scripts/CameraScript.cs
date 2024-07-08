@@ -10,13 +10,13 @@ public class CameraScript : MonoBehaviour {
     void Start()
     {
         mainCamera = GetComponent<Camera>();
-        player = GameObject.Find("Player");
+        player = GameObject.Find("P_Player");
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         try {
-            Vector3 playerInfo = player.transform.transform.position;
+            Vector3 playerInfo = player.transform.position;
             mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.x/* - cameraDistOffset*/);
         } catch (MissingReferenceException) {
         }

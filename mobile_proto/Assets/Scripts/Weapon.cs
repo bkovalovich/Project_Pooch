@@ -5,34 +5,37 @@ using UnityEngine;
 //Deploys and uses a weapon by the player
 public class Weapon : MonoBehaviour
 {
-    public Transform firePoint;//Where the weapon is used
-    public GameObject bulletprefab;//The basic bullet that will be continuously used
+    private Vector3 firePoint;//Where the weapon is used
+    private GameObject bulletPrefab;//The basic bullet that will be continuously used
+    private float rateOfFire;//How often the bullet can be fired
+
     protected float currentRechargeTime = 0f;//Determines current time between weapon uses
-    [SerializeField] protected float rateOfFire;//How often the bullet can be fired
-    [SerializeField] private AudioSource fireSFX;
 
-
-    public float RateOfFire {
-        get { return rateOfFire; }
-        set { rateOfFire = value; }
+    public void IntializeWeapon(float rateOfFire, Vector2 firePoint, GameObject bulletPrefab, bool playerBullet) {
+        this.rateOfFire = rateOfFire;
+        this.bulletPrefab = bulletPrefab;
+        this.firePoint = firePoint;
+        int layerName = 0;
+        if (playerBullet) { layerName = LayerMask.NameToLayer("DetectPBullets"); } else { layerName = LayerMask.NameToLayer("DetectEBulletsl"); }
+        this.bulletPrefab.gameObject.layer = layerName;
+        /*        int LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
+        gameObject.layer = LayerIgnoreRaycast;
+         */
+        //Debug.Log(firePoint);
     }
 
-    //Shoot()
-    //Creates bullet
-    public void Shoot(Vector3 offset) {
-         Instantiate(bulletprefab, firePoint.position + offset, firePoint.rotation);
+    private void ShootBullet() {
+        Instantiate(bulletPrefab, transform.TransformPoint(firePoint), gameObject.transform.rotation);
     }
-
-    //FixedUpdate()
-    //Shoots bullets at a rate determined by float rateOfFire
-     public void FixedUpdate() {
-        currentRechargeTime += Time.deltaTime;
+    public void FireWeapon() {
         if (currentRechargeTime >= rateOfFire) {
             currentRechargeTime = currentRechargeTime % rateOfFire;
-            fireSFX.Play();
-                Shoot(new Vector3(0, 0, 0));
-            
+            ShootBullet();
         }
+    }
+
+     public void FixedUpdate() {
+        currentRechargeTime += Time.deltaTime;
     }
 
    

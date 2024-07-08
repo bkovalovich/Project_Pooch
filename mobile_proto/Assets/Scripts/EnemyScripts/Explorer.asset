@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7c46f8aa0e1ca40aae1b7ed94e866c, type: 3}
+  m_Name: Explorer
+  m_EditorClassIdentifier: 
+  speed: 1
+  turnSpeed: 6
+  rateOfFire: 1
+  health: 500
+  radarRange: 0
+  bulletInfoSO: {fileID: 11400000, guid: 20fcabcfd3ebe1f4e92395b8071efadb, type: 2}
+  sprite: {fileID: 21300000, guid: fce4d8da9366dbb49afa81585cb47cda, type: 3}
+  firePoints: []
+  idleState: 1
+  chasingState: 2
+  destroyState: 3

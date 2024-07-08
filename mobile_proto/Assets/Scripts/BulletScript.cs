@@ -5,51 +5,31 @@ using UnityEngine;
 //A basic bullet used by the player
 public class BulletScript : MonoBehaviour
 {
-    private float currentSpeed;
-
-    [SerializeField] public float bulletSpeed;//Speed of bullet 20
-    [SerializeField] public float bulletSpeedWhenDashing;
-    [SerializeField] public float lifetime;//How long the bullet lasts
-    public Rigidbody2D rigid;//Accessing rigidbody in order to change position
-
-    public GameObject player;
-    private GameObject playerScript;
-    //gameObject.GetComponent<ScriptName>().variable
-    [SerializeField] public GameObject explosionEffect;
-
-
-
-    //Start()
-    //Changes rigidbody to continue moving in one direction
-    void Start()
-    {
-        currentSpeed = bulletSpeed;
-        rigid.velocity = transform.up * currentSpeed;
-        player = GameObject.Find("Player");
-
+    [SerializeField] CurrentShipSO currentShip;
+    private float bulletSpeed, lifetime;
+    private Sprite s;
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
+    private CapsuleCollider2D capcollider;
+    private void Awake() {
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        capcollider = GetComponent<CapsuleCollider2D>();
     }
-
-    //FixedUpdate()
-    //Destroys object after an amount of time
+    private void Start() {
+        if (currentShip == null) { Debug.LogError("BULLET COUDLN'T ACCESS CURRENTSHIPSO"); }
+        bulletSpeed = currentShip.SelectedShip.BulletInfo.BulletSpeed;
+        lifetime = currentShip.SelectedShip.BulletInfo.BulletLifetime;
+        sr.sprite = currentShip.SelectedShip.BulletInfo.BulletSprite;
+        capcollider.size = currentShip.SelectedShip.BulletInfo.HitboxSize;
+    }
     void FixedUpdate() {
-        if (player.GetComponent<PlayerMovement>().isDashPressed)
-        {
-            currentSpeed = bulletSpeedWhenDashing;
-        }
-        else
-        {
-            currentSpeed = bulletSpeed;
-        }
-        rigid.velocity = transform.up * currentSpeed;
+        rb.velocity = transform.up * bulletSpeed;
 
         lifetime -= Time.deltaTime;
         if (lifetime <= 0f) {
             Destroy(gameObject);    
         }
-    }
-
-    private void OnDestroy() {
-        Instantiate(explosionEffect, transform.position, transform.rotation);
     }
 }
 
